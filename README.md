@@ -7,6 +7,8 @@ This README would normally document whatever steps are necessary to get your app
 Jonathan Moran  <moranj13@udayton.edu>  CPS490-CapStone1
 =======
 James Oei oeij01@udayton.edu CPS490-Capstone1
+Will Manzella manzellaw2@udayton.edu 
+
 >>>>>>> a71a388cf34ca7a435abf7d1a78fea2d6801f6e1
 * Quick summary
 * Version
