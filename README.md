@@ -4,6 +4,8 @@ This README would normally document whatever steps are necessary to get your app
 
 ### What is this repository for? ###
 
+
+Jonathan Moran  <moranj13@udayton.edu>  CPS490-CapStone1
 * Quick summary
 * Version
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
