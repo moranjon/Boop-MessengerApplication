@@ -23,7 +23,7 @@ Instructor: Dr. Phu Phung
 # Team members
 
 1.  Jon Moran, moranj13@udayton.edu
-2.  Member 2, email
+2.  John Conroy, conroyj4@udayton.edu
 3.  Member 3, email
 4.  Member 4, email
 
