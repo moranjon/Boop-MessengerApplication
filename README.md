@@ -25,7 +25,7 @@ Instructor: Dr. Phu Phung
 1.  Jon Moran, moranj13@udayton.edu
 2.  John Conroy, conroyj4@udayton.edu
 3.  Will Manzella, manzellaw2@udayton.edu
-4.  Member 4, email
+4.  James Oei, oeij01@udayton.edu
 
 
 # Project Management Information
@@ -57,6 +57,7 @@ List high-level requirements of the project that your team will develop into use
 ## Use cases
 
 Draw the overview use case diagram, and define brief use case description for each use case _(Main focus of Sprint 0)_
+
 
 # System Design
 
