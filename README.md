@@ -9,7 +9,7 @@ University of Dayton
 
 Department of Computer Science
 
-CPS 490 - Capstone I, Semester Year
+CPS 490 - Capstone I, Fall 2021
 
 Instructor: Dr. Phu Phung
 
