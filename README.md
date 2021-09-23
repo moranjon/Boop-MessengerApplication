@@ -9,7 +9,7 @@ University of Dayton
 
 Department of Computer Science
 
-CPS 490 - Capstone I, Semester Year
+CPS 490 - Capstone I, Fall 2021
 
 Instructor: Dr. Phu Phung
 
@@ -57,6 +57,8 @@ List high-level requirements of the project that your team will develop into use
 ## Use cases
 
 Draw the overview use case diagram, and define brief use case description for each use case _(Main focus of Sprint 0)_
+
+[Use-Case](https://trello.com/1/cards/613774cb6b6e613e71568977/attachments/6137788715ba9b0631fe5cfe/download/use_case_capstone1.drawio.png "Use-Case")
 
 
 
