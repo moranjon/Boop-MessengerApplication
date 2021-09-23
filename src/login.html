@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> Boop 0.1</title>
+    </head>
+    <body>    
+
+
+    <div id = "loginUI"> 
+    Please login first: <br>
+    <input type = "text" id = "username" placeholder ="Enter your name ...">
+    <button type="button"
+    onclick ="login()">JOIN</button>
+    <script>
+        var socketio = io();
+        function login(){
+            var username = document.getElementById('username').value;
+            if(socketio)
+                socketio.emit("login",username)
+            socketio.on("Welcome", (welcomemessage) => {
+                document.getElementById('messages').innerHTML+='Welcome ' + welcomemessage + "<br>";
+
+            });
+        }
+    </script>
+</div>
+</body>
+</html>
