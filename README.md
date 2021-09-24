@@ -55,6 +55,12 @@ _(Start from Sprint 0, keep updating)_
 
 ## User Requirements
 
+- Users will login using a username and password which will give them access to their account
+- Once loggined into their account users can send messages into private or public chats
+- Users will be notified of the typing status of their recipients
+- Users can delete messages
+- Users can create groups/rooms of desired recipients
+
 List high-level requirements of the project that your team will develop into use cases in later steps _(Main focus of Sprint 0)_
 
 ## Use cases
@@ -129,11 +135,10 @@ _(Start from Sprint 0, keep updating)_
 
 Jon Moran will serve as scrum manager this sprint. All use cases and tasks are on a trello board and we divided up the task so that everyone has something to complete each week. Everyday at our weekly meeting we discuss any stoppages or if any one needs any help completing their tasks.
 
-Include the Trello board with product backlog and sprint cycles in an overview figure and also in detail description. _(Main focus of Sprint 0)_
 ![Trello](https://trello.com/1/cards/614e2c380e369754e8c2655d/attachments/614e2c5ddf9d6840a5de66bc/previews/614e2c5edf9d6840a5de66fb/download/Screenshot_(134).png)
 
 
-Trello Board Cards were created by team members with each use case serving as a card. In addition there is a goal for when we should complete each task. The goal is more easily veiwed in the Gantt chart below.
+Trello Board Cards were created by team members with each use case serving as a card. In addition there is a goal for when we should complete each task. The goal timelines is more easily veiwed in the Gantt chart below. Once someone begins a task it will be moved to in progress and then upon completion moved to the completed list of the corresponding sprint.
 Also, include the Gantt chart reflects the timeline from the Trello board. _(Main focus of Sprint 0)_
 ![Gantt](https://trello.com/1/cards/614e2baa400e9661c1ca62d2/attachments/614e2c2d4d96a745ccd4c463/previews/614e2c2e4d96a745ccd4c4c7/download/Screenshot_(136).png)
 
