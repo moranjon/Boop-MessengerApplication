@@ -127,11 +127,17 @@ Describe how to deploy your system in a specific platform.
 
 _(Start from Sprint 0, keep updating)_
 
-Introduce how your team uses a software management process, e.g., Scrum, how your teamwork, collaborate.
+Jon Moran will serve as scrum manager this sprint. All use cases and tasks are on a trello board and we divided up the task so that everyone has something to complete each week. Everyday at our weekly meeting we discuss any stoppages or if any one needs any help completing their tasks.
 
 Include the Trello board with product backlog and sprint cycles in an overview figure and also in detail description. _(Main focus of Sprint 0)_
+![Trello](https://trello.com/1/cards/614e2c380e369754e8c2655d/attachments/614e2c5ddf9d6840a5de66bc/previews/614e2c5edf9d6840a5de66fb/download/Screenshot_(134).png)
 
+
+Trello Board Cards were created by team members with each use case serving as a card. In addition there is a goal for when we should complete each task. The goal is more easily veiwed in the Gantt chart below.
 Also, include the Gantt chart reflects the timeline from the Trello board. _(Main focus of Sprint 0)_
+![Gantt](https://trello.com/1/cards/614e2baa400e9661c1ca62d2/attachments/614e2c2d4d96a745ccd4c463/previews/614e2c2e4d96a745ccd4c4c7/download/Screenshot_(136).png)
+
+Each task is in a certain order. The basic steps are first so that we can build off of them for a future task. Each task is scheduled for a week and each team member was assigned a task to do that week. Timeline is subject to change if need be. 
 
 
 ## Scrum process
