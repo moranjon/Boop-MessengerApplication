@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Messenger 0.1</title>
+</head>
+<body>
+<h1>Messenger 0.1 Chatroom</h1>
+<p>Developed by Team 3 in CPS490</p>
+<script src="/socket.io/socket.io.js"></script>
+<!-- the main UI here -->
+
+<div id="chatUI">
+Your Message:
+    <input type="text" id="message" placeholder="Enter your message ..."> 
+    <button type="button"
+    onclick="sendmessage()">Send</button>
+    
+    <script>
+        var socketio = io();
+        function sendmessage(){
+            socketio.emit("chat", document.getElementById('message').value);
+        }
+        socketio.on("chat", (chatmessage) => {
+                document.getElementById('messages').innerHTML+= chatmessage + "<br>";
+            });
+    </script>
+    <div id="messages"></div>
+</div>
+
+</body>
+</html>
