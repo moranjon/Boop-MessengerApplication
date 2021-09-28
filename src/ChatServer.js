@@ -6,7 +6,7 @@ server.listen(port);
 console.log(`Express HTTP Server is listening at port ${port}`)
 app.get('/', (request, response) => {
   //console.log("Got an HTTP request")  
-  response.sendFile(__dirname+'/index.html')
+  response.sendFile(__dirname+'/login.html')
 })
 var io = require('socket.io');
 var socketio = io.listen(server);
