@@ -18,6 +18,7 @@
             var username = document.getElementById('username').value;
             if(socketio)
                 socketio.emit("login",username)
+            location.href = 'index.html';
             socketio.on("Welcome", (welcomemessage) => {
                 document.getElementById('messages').innerHTML+='Welcome ' + welcomemessage + "<br>";
 
