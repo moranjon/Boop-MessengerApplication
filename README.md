@@ -65,20 +65,6 @@ List high-level requirements of the project that your team will develop into use
 
 ## Use cases
 
-<<<<<<< HEAD
-User create account- When using the messenger application, the first page is the user login page. The user login page will consist of two text boxes and two buttons, one for username, one for password, a button to submit credentials, and a button to create a new user. If the credentials are accepted using the new user button, the user will be taken to the main messenger page. 
-
-User login- When using the messenger application, the first page is the user login page. The user login page will consist of two text boxes and a button, one for username, one for password, a button to submit credentials, and a button to create a new user. If the credentials are accepted using the login button, the user will be taken to the main messenger page.
-
-User private message- When trying to send a private message, user will use the recipient text box to input a private users username. Once the recipients username is specified and the confirm recipient button is clicked, the user can then type out their message and send it using the send button.
-
-Join/create group message- When trying to join or create a group message, the user can input the group name into the join group text 
-
-User group message- When trying to send a group message, user will
-
-Draw the overview use case diagram, and define brief use case description for each use case _(Main focus of Sprint 0)_
-=======
->>>>>>> master
 
 ![Use-Case](https://i.ibb.co/F3fhtWc/use-case-capstone1-drawio.png)
 
