@@ -8,6 +8,7 @@ app.get('/', (request, response) => {
   //console.log("Got an HTTP request")  
   response.sendFile(__dirname+'/index.html')
 })
+const userList = [];
 var io = require('socket.io');
 var socketio = io.listen(server);
 console.log("Socket.IO is listening at port: " + port);
@@ -23,6 +24,8 @@ socketio.on("connection", function (socketclient) {
             socketclient.username=username;
             var welcomemessage = username + " has joined the chat system!";
             console.log(welcomemessage);
+            userList.push(username);
+            //console.log(userList);
             //socketio.sockets.emit("welcome", welcomemessage);
             SendToAuthenticatedClient(socketclient,"welcome", welcomemessage);
         }
