@@ -6,12 +6,10 @@ server.listen(port);
 console.log(`Express HTTP Server is listening at port ${port}`)
 app.get('/', (request, response) => {
   //console.log("Got an HTTP request")  
-<<<<<<< HEAD
   response.sendFile(__dirname+'/index.html')
-=======
-  response.sendFile(__dirname+'/login.html')
->>>>>>> master
+
 })
+const userList = [];
 var io = require('socket.io');
 var socketio = io.listen(server);
 console.log("Socket.IO is listening at port: " + port);
@@ -22,6 +20,7 @@ socketio.on("connection", function (socketclient) {
     socketclient.on("login", (username) => {
         socketclient.username = username;
         var welcomemessage = username + " has joined the chat system!";
+        userList.push(username);
         console.log(welcomemessage);
         socketio.sockets.emit("Welcome", welcomemessage);
     });
