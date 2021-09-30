@@ -69,18 +69,41 @@
                 document.getElementById("chatUI").style.display = "block";
                 document.getElementById('welcomemessagediv').innerHTML +=
                     "You are successfully logged in! You can start chatting now.<br>";
+                document.getElementById("loggedInUI").style.display = "block";
                 document.getElementById("friendUI").style.display = "block";
             });
+
+            // socketio.on("logout", () => {
+                //
+            //});
         </script>
         <br>
     </div>
+
+    <!--
+    <div id="loggedInUI" style ="display:none">
+        <span id="top"></span>
+        <button type="button" onclick="logout()">Logout</button>
+        <script>
+            socketio.on("loggedin", (loggedinmessage) => {
+                document.getElementById('top').innerHTML = loggedinmessage;
+            }); 
+            
+            function logout() {
+                socketio.on("logout", (logoutmessage) => {
+                document.getElementById('messages').innerHTML += logoutmessage + "<br>";
+                });
+            }
+        </script>        
+    </div>
+    -->
 
     <div id="friendUI" style ="display:none;">
         Add User as Friend:
         <input type="text" id="friendName" placeholder="Enter friend's username ...">
         <button type="button" onclick="addFriend()">Add</button>
 
-        <script>
+        <script>            
             function addFriend() {
                 socketio.emit("friend", document.getElementById('friendName').value);
             }

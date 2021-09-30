@@ -24,6 +24,11 @@ socketio.on("connection", function (socketclient) {
             socketclient.username=username;
             var welcomemessage = username + " has joined the chat system!";
             console.log(welcomemessage);
+
+            // LOGGED OUT FUNCTIONALITY - finish implementing in the future
+            //var loggedinmessage = "You are logged in as " + username;
+            //socketio.sockets.emit("loggedin", loggedinmessage);
+            
             userList.push(username);
             console.log(userList);            
             //socketio.sockets.emit("welcome", welcomemessage);
@@ -34,6 +39,13 @@ socketio.on("connection", function (socketclient) {
         //console.log(welcomemessage);
         //socketio.sockets.emit("Welcome", welcomemessage);
     });
+
+    // A user logs out....
+    //socketclient.on("logout", function() {
+    //    var logoutmessage = socketclient.username + " has logged out from the chat system."
+    //    console.log(logoutmessage);
+    //    socketio.sockets.emit("logout", logoutmessage);
+    //});
     
     socketclient.on("chat", (message) => {
         if(!socketclient.authenticated) {
@@ -50,7 +62,7 @@ socketio.on("connection", function (socketclient) {
     socketclient.on('disconnect', function(){
         console.log( //socketclient.client.conn.remoteAddress+":"+
         socketclient.username+" with ID:"+socketclient.id + ' has disconnected');
-        var disconnectmessage = socketclient.username + " has disconnected from the chat system. :(";
+        var disconnectmessage = socketclient.username + " has disconnected from the chat system.";
         // make sure it only shows up if a user is actually logged into chat
         if(socketclient.username!=undefined){
         socketio.sockets.emit("disconnect", disconnectmessage);
