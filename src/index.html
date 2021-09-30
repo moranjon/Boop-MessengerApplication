@@ -43,6 +43,24 @@
                 text-align: center;
                 font-family: Arial, Helvetica, sans-serif;
             }
+            #landingUI {
+                background-color: lightblue; 
+                margin: auto;
+                width: 45%;
+                border: 1px solid gray;
+                padding: 10px;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            #privateUI {
+                background-color: lightblue; 
+                margin: auto;
+                width: 45%;
+                border: 1px solid gray;
+                padding: 10px;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+            }
                                     
         </style>
     </head>
@@ -138,8 +156,12 @@
         Your Message:
         <input type="text" id="message" onkeypress="entertoSend(event)" onkeyup="sendTyping()" required="" placeholder="Enter your message ..."/>
         <button type="button" onclick="sendmessage()">Send</button>
+        <button type="button" onclick="clearmessage()">Clear Messages</button>
 
         <script>
+            function clearmessage(){
+                document.getElementById('messages').innerHTML = "";
+            }
             function sendmessage() {
                 socketio.emit("chat", document.getElementById('message').value);
                 document.getElementById("welcomemessagediv").style.display = "none";
@@ -188,10 +210,10 @@
         Your Message:
         <input type="text" id="message" onkeypress="entertoSend(event)" onkeyup="sendTyping()" required="" placeholder="Enter your message ..."/>
         <button type="button" onclick="sendmessage()">Send</button>
-        <button type="button" onclick="clearchat()">Clear Chat</button>
+        <button type="button" onclick="pclearchat()">Clear Chat</button>
         <script>
-            function clearchat(){
-                document.getElementById('messages').innerHTML = "";
+            function pclearchat(){
+                document.getElementById('pmessages').innerHTML = "";
             }
 
             function sendmessage() {
