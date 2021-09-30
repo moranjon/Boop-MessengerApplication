@@ -8,7 +8,7 @@
             body {background-color: rgb(255, 223, 223);}
             h1 {
                 color: red;
-                font-size: 100px;
+                font-size: 80px;
             }
             #loginUI {
                 margin: auto;
@@ -33,7 +33,17 @@
             }  
             #messages {
                 text-align: left;
-            }            
+            }
+            #friendUI {
+                background-color: lightblue; 
+                margin: auto;
+                width: 45%;
+                border: 1px solid gray;
+                padding: 10px;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+                                    
         </style>
     </head>
 
@@ -178,8 +188,11 @@
         Your Message:
         <input type="text" id="pmessage" onkeypress="entertoSend(event)" onkeyup="sendTyping()" required="" placeholder="Enter your message ..."/>
         <button type="button" onclick="psendmessage()">Send</button>
-
+        <button type="button" onclick="clearchat()">Clear Chat</button>
         <script>
+            function clearchat(){
+                document.getElementById('messages').innerHTML = "";
+            }
             function psendmessage() {
                 socketio.emit("pchat", document.getElementById('pmessage').value, document.getElementById('pusername').value);
                 document.getElementById("pwelcomemessagediv").style.display = "none";
@@ -216,8 +229,6 @@
         <br>
         <div id="pmessages"></div>
     </div>
-
-    
 
 </body>
 
