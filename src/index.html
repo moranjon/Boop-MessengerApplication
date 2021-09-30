@@ -38,6 +38,7 @@
             socketio.on("authenticated", () => {
                 document.getElementById("loginUI").style.display = "none";
                 document.getElementById("chatUI").style.display = "block";
+                document.getElementById("friendUI").style.display = "block";
                 document.getElementById('messages').innerHTML +=
                     "You are successfully logged in! Can start chatting now.<br>";
             });
@@ -45,7 +46,24 @@
         <br>
     </div>
 
+    <div id="friendUI" style ="display:none;">
+        Add User as Friend:
+        <input type="text" id="friendName" placeholder="Enter friend's username ...">
+        <button type="button" onclick="addFriend()">Add</button>
+
+        <script>
+            function addFriend() {
+                socketio.emit("friend", document.getElementById('friendName').value);
+            }
+            socketio.on("friend", (friendText) => {
+                document.getElementById('messages').innerHTML += friendText + "<br>";
+            });
+        </script>
+        <div id="friendName"></div>
+    </div>
+
     <div id="chatUI" style="display:none;">
+        <br>
         Your Message:
         <input type="text" id="message" placeholder="Enter your message ...">
         <button type="button" onclick="sendmessage()">Send</button>
@@ -63,6 +81,8 @@
         </script>
         <div id="messages"></div>
     </div>
+
+    
 
 </body>
 
