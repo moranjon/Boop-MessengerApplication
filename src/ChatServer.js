@@ -111,3 +111,16 @@ function SendToAuthenticatedClient(sendersocket,type,data){
         }
     }
 }
+//type: emit/on keyword // data = message
+function sendPrivateMessage(recipientName,type,data){
+    var sockets = socketio.sockets.sockets;
+    for(var socketId in sockets){
+        var socketclient = sockets[socketId];
+        if(socketclient.username == recipientName){
+            socketclient.emit(type,data);
+            var logmsg= " * Private Message sent to " +
+                socketclient.username + " with ID=" + socketId;
+            console.log(logmsg);
+        }
+    }
+}
