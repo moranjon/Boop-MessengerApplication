@@ -6,13 +6,42 @@
         <title>Boop 0.1</title>
         <style>
             body {background-color: rgb(255, 223, 223);}
-            h1 {color: red;}
+            h1 {
+                color: red;
+                font-size: 100px;
+            }
+            #loginUI {
+                margin: auto;
+                width: 45%;
+                border: 1px solid gray;
+                padding: 10px;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+                background-color: lightblue;
+            }
+            #chatUI {
+                background-color: lightblue; 
+                margin: auto;
+                width: 45%;
+                border: 1px solid gray;
+                padding: 10px;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;               
+            }
+            #head {
+                font-family: Arial, Helvetica, sans-serif; 
+            }  
+            #messages {
+                text-align: left;
+            }            
         </style>
     </head>
 
 <body>
-    <h1>Boop 0.1</h1>
-    <p>Developed by Team 3 in CPS490</p>
+    <div id="head">
+        <h1>Boop 0.1</h1>
+    </div>
+    
     <script src="/socket.io/socket.io.js"></script>
     <!-- the main UI here -->
     <div id="loginUI">
@@ -35,8 +64,8 @@
             socketio.on("authenticated", () => {
                 document.getElementById("loginUI").style.display = "none";
                 document.getElementById("chatUI").style.display = "block";
-                document.getElementById('messages').innerHTML +=
-                    "You are successfully logged in! Can start chatting now.<br>";
+                document.getElementById('welcomemessagediv').innerHTML +=
+                    "You are successfully logged in! You can start chatting now.<br>";
             });
         </script>
         <br>
@@ -50,11 +79,13 @@
         <script>
             function sendmessage() {
                 socketio.emit("chat", document.getElementById('message').value);
+                document.getElementById("welcomemessagediv").style.display = "none";
             }
             socketio.on("chat", (chatmessage) => {
                 document.getElementById('messages').innerHTML += chatmessage + "<br>";
             });
         </script>
+        <div id="welcomemessagediv"></div>
         <div id="messages"></div>
     </div>
 
