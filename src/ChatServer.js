@@ -25,7 +25,7 @@ socketio.on("connection", function (socketclient) {
             var welcomemessage = username + " has joined the chat system!";
             console.log(welcomemessage);
             userList.push(username);
-            //console.log(userList);
+            console.log(userList);            
             //socketio.sockets.emit("welcome", welcomemessage);
             SendToAuthenticatedClient(socketclient,"welcome", welcomemessage);
         }
@@ -45,6 +45,25 @@ socketio.on("connection", function (socketclient) {
         //socketio.sockets.emit("chat", chatmessage);
         SendToAuthenticatedClient(undefined,"chat",chatmessage);
     });
+    
+    console.log("Connected clients:");
+    var sockets = socketio.sockets.sockets;
+    for(var socketId in sockets)
+    {
+        var socketclient = sockets[socketId];
+        console.log(socketclient.id); //socketclient.client.conn.remoteAddress+":"+
+    }
+    
+    // when a user disconnects (closes the tab)
+    socketclient.on('disconnect', function(){
+        console.log( //socketclient.client.conn.remoteAddress+":"+
+        socketclient.username+" with ID:"+socketclient.id + ' has disconnected');
+        var disconnectmessage = socketclient.username + " has disconnected from the chat system. :(";
+        // make sure it only shows up if a user is actually logged into chat
+        if(socketclient.username!=undefined){
+        socketio.sockets.emit("disconnect", disconnectmessage);
+        }
+    });    
 });
 
 var DataLayer = {

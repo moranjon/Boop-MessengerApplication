@@ -32,6 +32,9 @@
             socketio.on("Welcome", (welcomemessage) => {
                 document.getElementById('messages').innerHTML += welcomemessage + "<br>";
             });
+
+            
+            
             socketio.on("authenticated", () => {
                 document.getElementById("loginUI").style.display = "none";
                 document.getElementById("chatUI").style.display = "block";
@@ -53,6 +56,9 @@
             }
             socketio.on("chat", (chatmessage) => {
                 document.getElementById('messages').innerHTML += chatmessage + "<br>";
+            });
+            socketio.on("disconnect", (disconnectmessage) => {
+                document.getElementById('messages').innerHTML += disconnectmessage + "<br>";
             });
         </script>
         <div id="messages"></div>
