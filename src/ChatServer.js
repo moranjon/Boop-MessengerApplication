@@ -22,8 +22,14 @@ socketio.on("connection", function (socketclient) {
             socketclient.authenticated=true;
             socketclient.emit("authenticated");
             socketclient.username=username;
+            socketclient.recipient=""; // added for private messaging
             var welcomemessage = username + " has joined the chat system!";
             console.log(welcomemessage);
+
+            // LOGGED OUT FUNCTIONALITY - finish implementing in the future
+            //var loggedinmessage = "You are logged in as " + username;
+            //socketio.sockets.emit("loggedin", loggedinmessage);
+            
             userList.push(username);
             console.log(userList);            
             //socketio.sockets.emit("welcome", welcomemessage);
@@ -34,6 +40,13 @@ socketio.on("connection", function (socketclient) {
         //console.log(welcomemessage);
         //socketio.sockets.emit("Welcome", welcomemessage);
     });
+
+    // A user logs out....
+    //socketclient.on("logout", function() {
+    //    var logoutmessage = socketclient.username + " has logged out from the chat system."
+    //    console.log(logoutmessage);
+    //    socketio.sockets.emit("logout", logoutmessage);
+    //});
     
     socketclient.on("chat", (message) => {
         if(!socketclient.authenticated) {
@@ -46,11 +59,22 @@ socketio.on("connection", function (socketclient) {
         SendToAuthenticatedClient(undefined,"chat",chatmessage);
     });
 
+    socketclient.on("pchat", (message,person) => {
+        if(!socketclient.authenticated) {
+            console.log("Unauthenticated client sent a chat. Suppress!");
+            return;
+        }
+        var chatmessage = socketclient.username + " says: " + message;
+        console.log(chatmessage);
+        //socketio.sockets.emit("chat", chatmessage);
+        sendPrivateMessage(socketclient,person,"pchat",chatmessage)
+    });
+
     // when a user disconnects (closes the tab)
     socketclient.on('disconnect', function(){
         console.log( //socketclient.client.conn.remoteAddress+":"+
         socketclient.username+" with ID:"+socketclient.id + ' has disconnected');
-        var disconnectmessage = socketclient.username + " has disconnected from the chat system. :(";
+        var disconnectmessage = socketclient.username + " has disconnected from the chat system.";
         // make sure it only shows up if a user is actually logged into chat
         if(socketclient.username!=undefined){
         socketio.sockets.emit("disconnect", disconnectmessage);
@@ -86,7 +110,7 @@ socketio.on("connection", function (socketclient) {
         socketio.sockets.emit("<TYPING>", msg);
         //SendToAuthenticatedClient(undefined,"<TYPING>", msg)        
         console.log("[<TYPING>," + msg + "] is sent to all connected clients");
-    });        
+    });
 });
 
 var DataLayer = {
@@ -109,5 +133,29 @@ function SendToAuthenticatedClient(sendersocket,type,data){
                 socketclient.username + " with ID=" + socketId;
             console.log(logmsg);
         }
+    }
+}
+//type: emit/on keyword // data = message
+function sendPrivateMessage(senderclient,recipientName,type,data){
+    var sockets = socketio.sockets.sockets;
+    var tf = false;
+    for(var socketId in sockets){
+        var socketclient = sockets[socketId];
+        if(socketclient.username == recipientName){
+            tf = true;
+            //senderclient.recipient = recipientName;
+            senderclient.emit(type,data);
+            socketclient.emit(type,data); //socketclient is recipient, emits "chat" request to them containing msg
+            var logmsg= " * Private Message sent to " +
+                socketclient.username + " with ID=" + socketId;
+            console.log(logmsg);
+        }
+    }
+    if (!tf){
+        data = "User " + recipientName + " not found."
+        senderclient.emit(type,data);
+        var logmsg= " **** User: " +
+                recipientName + " not found.";
+            console.log(logmsg);
     }
 }
