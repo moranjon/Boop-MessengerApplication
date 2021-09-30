@@ -186,29 +186,35 @@ Duration: 09/09/2021 - 10-05-2021
 
 #### Completed Tasks: 
 
-1. Hello World Page (simple start of having an html page up)
-2. Task 2
-3. ...
+1. Create Login UI
+2. Create Public message page
+3. Create Private message page
+4. Implement CSS
+5. Display/ send and recieve messages
+6. Maintain userlist
+7. Send and recieve messages from a specific user
+8. Add users as friends
+9. Clear Chat
+10. Notify others when a user disconnects
 
 #### Contributions: 
 
-1.  Jon Moran, x hours, contributed in xxx
-2.  John Conroy, x hours, contributed in xxx
-3.  James Oei, x hours, contributed in xxx
-4.  Will Manzella, x hours, contributed in xxx
+1.  Jon Moran, 10-14 hours, contributed in planning, the overall overview, use cases, the slides/presentation
+2.  John Conroy, 10-14 hours, contributed in planning, meeting scheduling, deployment, the slides/presentation
+3.  James Oei, 10-14 hours, contributed in planning, deployment, system design, features, the slides/presentation
+4.  Will Manzella, 10-14 hours, contributed in planning, organization, use cases, the slides/presentation
+
 
 #### Sprint Retrospective:
 
 _(Introduction to Sprint Retrospective:
 
-_Working through the sprints is a continuous improvement process. Discussing the sprint has just completed can improve the next sprints walk through a much efficient one. Sprint retrospection is done once a sprint is finished and the team is ready to start another sprint planning meeting. This discussion can take up to 1 hour depending on the ideal team size of 6 members. 
-Discussing good things happened during the sprint can improve the team's morale, good team-collaboration, appreciating someone who did a fantastic job to solve a blocker issue, work well-organized, helping someone in need. This is to improve the team's confidence and keep them motivated.
-As a team, we can discuss what has gone wrong during the sprint and come-up with improvement points for the next sprints. Few points can be like, need to manage time well, need to prioritize the tasks properly and finish a task in time, incorrect design lead to multiple reviews and that wasted time during the sprint, team meetings were too long which consumed most of the effective work hours. We can mention every problem is in the sprint which is hindering the progress.
-Finally, this meeting should improve your next sprint drastically and understand the team dynamics well. Mention the bullet points and discuss how to solve it.)_
+Sprint 1 became a greater time crunch due to the increased workload from sprint 0 as well as busier schedules and time mismanagement. Fortunately, even through all of that adversity, our team was able to come together and dedicate important time to completing sprint 1. 
+Everyone worked together to fulfill their roles and the project progressed smoothly. We learned how through small feature additions, many unintentional bugs can be producted which is frustrating. 
 
-| Good     |   Could have been better    |  How to improve?  |
-|----------|:---------------------------:|------------------:|
-|          |                             |                   |
+| Good                                       |   Could have been better    |  How to improve?  |
+|--------------------------------------------|:---------------------------:|------------------:|
+|  Working together and focusing on the task |  Preplanning for task ideas |  Time management  |
 
 
 -----------------------------------------------------------------------------
