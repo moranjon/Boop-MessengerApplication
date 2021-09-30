@@ -44,7 +44,7 @@
 
     <div id="chatUI" style="display:none;">
         Your Message:
-        <input type="text" id="message" placeholder="Enter your message ...">
+        <input type="text" id="message" onkeypress="entertoSend(event)" onkeyup="sendTyping()" required="" placeholder="Enter your message ..."/>
         <button type="button" onclick="sendmessage()">Send</button>
 
         <script>
@@ -54,7 +54,27 @@
             socketio.on("chat", (chatmessage) => {
                 document.getElementById('messages').innerHTML += chatmessage + "<br>";
             });
+            
+            function sendTyping() {
+                socketio.emit("<TYPE>");
+                console.log('Sent to server: <TYPE>');
+            }
+            //Typing Functionality Implementation // " is typing <span>.</span>"
+            socketio.on("<TYPING>", function(msg){
+                // document.getElementById("typing").innerHTML = sanitizeHTML(msg) + " is typing."
+                document.getElementById("typing").innerHTML = msg + " is typing..."
+                setTimeout(function(){document.getElementById("typing").innerHTML = "<br>";},3000);
+                console.log('<TYPING>Received from server: ' + msg);
+            });
+                        
         </script>
+
+        <!-- Typing Functionality Implementation-->
+        <br>
+        <div id="typing"></div>
+        <!-- Message from server: -->
+        
+        <br>
         <div id="messages"></div>
     </div>
 

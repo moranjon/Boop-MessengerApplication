@@ -42,6 +42,15 @@ socketio.on("connection", function (socketclient) {
         //socketio.sockets.emit("chat", chatmessage);
         SendToAuthenticatedClient(undefined,"chat",chatmessage);
     });
+
+    socketclient.on("<TYPE>", function(){
+        //not working, non essential, just doesnt say typing is user blank
+        //if (isNullOrUndefined(socketclient.username)) {return;}
+        var msg = socketclient.username;
+        socketio.sockets.emit("<TYPING>", msg);
+        //SendToAuthenticatedClient(undefined,"<TYPING>", msg)        
+        console.log("[<TYPING>," + msg + "] is sent to all connected clients");
+    });
 });
 
 var DataLayer = {
