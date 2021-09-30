@@ -45,6 +45,28 @@ socketio.on("connection", function (socketclient) {
         //socketio.sockets.emit("chat", chatmessage);
         SendToAuthenticatedClient(undefined,"chat",chatmessage);
     });
+
+    socketclient.on("friend", (friendName) => {
+        if(!socketclient.authenticated) {
+            console.log("Unauthenticated client added a friend. Suppress!");
+            return;
+        }
+        var flag = 0;
+        for(let i = 0; i < userList.length; i++ ){
+            if(friendName == userList[i]){
+                var friendMessage = socketclient.username + " added " + friendName + " as a friend";
+                console.log(friendMessage);
+                flag = 1;
+            }
+            if(flag == 0){
+                var friendMessage = friendName + " does not exist. Please enter a valid username";
+                console.log(friendMessage + i);
+            }
+        }
+
+        //socketio.sockets.emit("friend", friendMessage);
+        SendToAuthenticatedClient(undefined,"friend",friendMessage);
+    });
 });
 
 var DataLayer = {
