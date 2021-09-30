@@ -8,6 +8,7 @@ app.get('/', (request, response) => {
   //console.log("Got an HTTP request")  
   response.sendFile(__dirname+'/index.html')
 })
+const userList = [];
 var io = require('socket.io');
 var socketio = io.listen(server);
 console.log("Socket.IO is listening at port: " + port);
@@ -23,6 +24,8 @@ socketio.on("connection", function (socketclient) {
             socketclient.username=username;
             var welcomemessage = username + " has joined the chat system!";
             console.log(welcomemessage);
+            userList.push(username);
+            //console.log(userList);
             //socketio.sockets.emit("welcome", welcomemessage);
             SendToAuthenticatedClient(socketclient,"welcome", welcomemessage);
         }
@@ -43,6 +46,28 @@ socketio.on("connection", function (socketclient) {
         SendToAuthenticatedClient(undefined,"chat",chatmessage);
     });
 
+    socketclient.on("friend", (friendName) => {
+        if(!socketclient.authenticated) {
+            console.log("Unauthenticated client added a friend. Suppress!");
+            return;
+        }
+        var flag = 0;
+        for(let i = 0; i < userList.length; i++ ){
+            if(friendName == userList[i]){
+                var friendMessage = socketclient.username + " added " + friendName + " as a friend";
+                console.log(friendMessage);
+                flag = 1;
+            }
+            if(flag == 0){
+                var friendMessage = friendName + " does not exist. Please enter a valid username";
+                console.log(friendMessage + i);
+            }
+        }
+
+        //socketio.sockets.emit("friend", friendMessage);
+        SendToAuthenticatedClient(undefined,"friend",friendMessage);
+    });
+
     socketclient.on("<TYPE>", function(){
         //not working, non essential, just doesnt say typing is user blank
         //if (isNullOrUndefined(socketclient.username)) {return;}
@@ -50,7 +75,7 @@ socketio.on("connection", function (socketclient) {
         socketio.sockets.emit("<TYPING>", msg);
         //SendToAuthenticatedClient(undefined,"<TYPING>", msg)        
         console.log("[<TYPING>," + msg + "] is sent to all connected clients");
-    });
+    });        
 });
 
 var DataLayer = {
