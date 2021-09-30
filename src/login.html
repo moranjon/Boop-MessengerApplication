@@ -2,13 +2,6 @@
 <html>
     <head>
         <meta charset="UTF-8">
-<<<<<<< HEAD
-        <title> Boop 0.1</title>
-    </head>
-    <body>    
-
-
-=======
         <title>Boop 0.1</title>
         <style>
             body {background-color: rgb(255, 223, 223);}
@@ -19,7 +12,6 @@
     <h1>Login</h1>
     <h3>Prepare to send a Boop!</h3>
     <body>
->>>>>>> master
     <div id = "loginUI"> 
     Please login first: <br>
     <input type = "text" id = "username" placeholder ="Enter your name ...">
@@ -31,20 +23,11 @@
             var username = document.getElementById('username').value;
             if(socketio)
                 socketio.emit("login",username)
-<<<<<<< HEAD
-            location.href = 'index.html';
-            socketio.on("Welcome", (welcomemessage) => {
-                document.getElementById('messages').innerHTML+='Welcome ' + welcomemessage + "<br>";
-
-            });
-        }
-=======
             socketio.on("Welcome", (welcomemessage) => {
                 document.getElementById('messages').innerHTML+='Welcome ' + welcomemessage + "<br>";
             });
         location.href = "index.html";
     };
->>>>>>> master
     </script>
 </div>
 </body>
