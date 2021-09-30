@@ -1,0 +1,29 @@
+{
+  "name": "src",
+  "version": "1.0.0",
+  "description": "Boop Node.js App for CPS490 - by Team 3",
+  "main": "ChatServer.js",
+  "scripts": {
+    "test": "node ChatServer.js",
+    "start": "node ChatServer.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/cps490f21-team3/cps490-project-team3.git"
+  },
+  "keywords": [
+    "Node.js",
+    "Socket.io",
+    "Capstone"
+  ],
+  "author": "Team 3",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://bitbucket.org/cps490f21-team3/cps490-project-team3/issues"
+  },
+  "homepage": "https://bitbucket.org/cps490f21-team3/cps490-project-team3#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  }
+}
