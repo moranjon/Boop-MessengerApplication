@@ -76,13 +76,42 @@
             
             socketio.on("authenticated", () => {
                 document.getElementById("loginUI").style.display = "none";
-                document.getElementById("chatUI").style.display = "block";
+                document.getElementById("landingUI").style.display = "block";
+                document.getElementById("chatUI").style.display = "none";
                 document.getElementById('welcomemessagediv').innerHTML +=
                     "You are successfully logged in! You can start chatting now.<br>";
-                document.getElementById("friendUI").style.display = "block";
+                document.getElementById("friendUI").style.display = "none";
             });
         </script>
         <br>
+    </div>
+
+    <div id= "landingUI" style = "display:none;">
+        Choose a mode of chat:
+
+        <button type="button" onclick="pubChat()">Public</button>
+        <button type="button" onclick="privChat()">Private</button>
+
+        <script>
+            function pubChat(){
+                document.getElementById("chatUI").style.display = "block";
+                document.getElementById("friendUI").style.display = "block";
+
+                document.getElementById("privateUI").style.display = "none";
+            }
+        </script>
+
+        <script>
+            function privChat(){
+                document.getElementById("privateUI").style.display = "block";
+                document.getElementById("friendUI").style.display = "block";
+
+                document.getElementById("chatUI").style.display = "none";
+            }
+        </script>
+        
+
+    
     </div>
 
     <div id="friendUI" style ="display:none;">
@@ -103,6 +132,59 @@
 
     <div id="chatUI" style="display:none;">
         <br>
+        <title>Public Chat</title>
+        <br>
+        <br>
+        Your Message:
+        <input type="text" id="message" onkeypress="entertoSend(event)" onkeyup="sendTyping()" required="" placeholder="Enter your message ..."/>
+        <button type="button" onclick="sendmessage()">Send</button>
+
+        <script>
+            function sendmessage() {
+                socketio.emit("chat", document.getElementById('message').value);
+                document.getElementById("welcomemessagediv").style.display = "none";
+            }
+            socketio.on("chat", (chatmessage) => {
+                document.getElementById('messages').innerHTML += chatmessage + "<br>";                
+            });
+            socketio.on("disconnect", (disconnectmessage) => {
+                document.getElementById('messages').innerHTML += disconnectmessage + "<br>";
+            });
+            
+            function sendTyping() {
+                socketio.emit("<TYPE>");
+                console.log('Sent to server: <TYPE>');
+            }
+            //Typing Functionality Implementation // " is typing <span>.</span>"
+            socketio.on("<TYPING>", function(msg){
+                // document.getElementById("typing").innerHTML = sanitizeHTML(msg) + " is typing."
+                document.getElementById("typing").innerHTML = msg + " is typing..."
+                setTimeout(function(){document.getElementById("typing").innerHTML = "<br>";},3000);
+                console.log('<TYPING>Received from server: ' + msg);
+            });
+
+    
+                        
+        </script>
+        <div id="welcomemessagediv"></div>
+
+        <!-- Typing Functionality Implementation-->
+        <br>
+        <div id="typing"></div>
+        <!-- Message from server: -->
+        
+        <br>
+        <div id="messages"></div>
+    </div>
+
+    <div id="privateUI" style="display:none;">
+        <br>
+        <title>Private Chat</title>
+        <br>
+        <br>
+        Send private message to:
+        <input type="text" id="pUsername" placeholder="Enter recipient">
+        <br>        
         Your Message:
         <input type="text" id="message" onkeypress="entertoSend(event)" onkeyup="sendTyping()" required="" placeholder="Enter your message ..."/>
         <button type="button" onclick="sendmessage()">Send</button>
@@ -134,6 +216,8 @@
                 setTimeout(function(){document.getElementById("typing").innerHTML = "<br>";},3000);
                 console.log('<TYPING>Received from server: ' + msg);
             });
+
+    
                         
         </script>
         <div id="welcomemessagediv"></div>
