@@ -97,7 +97,7 @@ _Draw the overview use case diagram, and define brief use case description for e
 
 # System Design
 
-![Interaction_Diagram](https://trello.com/1/cards/615a75be5a96654019122685/attachments/615a75dae50f1160787529f3/download/Sprint-1-Diagram.png)
+![Interaction_Diagram](https://i.ibb.co/6PbsvBg/System-Design.png)
 _(Start from Sprint 1, keep updating)_
 
 ## Use-Case Realization
