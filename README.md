@@ -150,9 +150,11 @@ Disconnected User
 Backend: listens for an event in which the user closes that tab and notifies the user. It also searches the userlIst for the user and removes it from the array.
 ![friend](src=https://i.ibb.co/Rb0hvGm/Screenshot-172.png)
 
-
+Clear Chat
+![clear](https://i.ibb.co/27z43SC/Screenshot-184.png)
 Specify the development approach of your team, including programming languages, database, development, testing, and deployment environments. 
 
+This project is being created by all four members. Each member is assigned tasks from the trello board and work on the according to the Gantt Chart. The front end of the site is created using html5 with styling done in CSS. The backend is created using javaScript, more specifically Node.js for the server. All editing is done in Google Cloud Shell Editor. Code is shared with each other using bitbucket, utilizing git commands to push and pull code. The site is deployed through heroku for free.
 
 ## Deployment
 
