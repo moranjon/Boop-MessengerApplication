@@ -73,13 +73,13 @@
     
     <script src="/socket.io/socket.io.js"></script>
     <!-- the main UI here -->
-    <div id="loginUI">
+    <div id="loginUI"> 
         Please login first: <br>
-        <input type="text" id="username" placeholder="Enter your name ...">
+        <input type="text" id="username" placeholder="Enter your name ..."> <!-- prompts user to input username and password-->
         <input type="password" id="password" placeholder="Password">
         <button type="button" onclick="login()">JOIN</button>
 
-        <script>
+        <script> // login function, sends login info to ChatServer and displays username in chat
             var socketio = io();
             function login() {
                 var username = document.getElementById('username').value;
@@ -93,7 +93,7 @@
 
             
             
-            socketio.on("authenticated", () => {
+            socketio.on("authenticated", () => { // hides the login page and displays landing page and add friends bar
                 document.getElementById("loginUI").style.display = "none";
                 document.getElementById("landingUI").style.display = "block";
                 document.getElementById("chatUI").style.display = "none";
@@ -128,14 +128,14 @@
         </script>        
     </div>
     -->
-    <div id= "landingUI" style = "display:none;">
+    <div id= "landingUI" style = "display:none;"> <!-- landing UI is used to direct users to eother public or private chat-->
         Choose a mode of chat:
 
         <button type="button" onclick="pubChat()">Public</button>
         <button type="button" onclick="privChat()">Private</button>
 
         <script>
-            function pubChat(){
+            function pubChat(){// script to hide others pages and dislay the public chat content division
                 document.getElementById("chatUI").style.display = "block";
                 document.getElementById("friendUI").style.display = "block";
 
@@ -144,7 +144,7 @@
         </script>
 
         <script>
-            function privChat(){
+            function privChat(){ // script to hide other pages and display private chat content div
                 document.getElementById("privateUI").style.display = "block";
                 document.getElementById("friendUI").style.display = "block";
 
@@ -156,13 +156,13 @@
     
     </div>
 
-    <div id="friendUI" style ="display:none;">
+    <div id="friendUI" style ="display:none;"> <!-- interface to add other users as friends by username-->
         Add User as Friend:
         <input type="text" id="friendName" placeholder="Enter friend's username ...">
         <button type="button" onclick="addFriend()">Add</button>
 
         <script>            
-            function addFriend() {
+            function addFriend() { //sends friend request to the chatserver based on friends name
                 socketio.emit("friend", document.getElementById('friendName').value);
             }
             socketio.on("friend", (friendText) => {
@@ -172,7 +172,7 @@
         <div id="friendName"></div>
     </div>
 
-    <div id="chatUI" style="display:none;">
+    <div id="chatUI" style="display:none;"> <!-- public chat user interface-->
         <br>
         <title>Public Chat</title>
         <br>
@@ -183,17 +183,17 @@
         <button type="button" onclick="clearmessage()">Clear Messages</button>
 
         <script>
-            function clearmessage(){
+            function clearmessage(){ // script to clear the public chat message log
                 document.getElementById('messages').innerHTML = "";
             }
-            function sendmessage() {
+            function sendmessage() { //script that tells server to send message to public chat
                 socketio.emit("chat", document.getElementById('message').value);
                 document.getElementById("welcomemessagediv").style.display = "none";
             }
             socketio.on("chat", (chatmessage) => {
                 document.getElementById('messages').innerHTML += chatmessage + "<br>";                
             });
-            socketio.on("disconnect", (disconnectmessage) => {
+            socketio.on("disconnect", (disconnectmessage) => { //script that informs user in public chat log that a user has disconnected
                 document.getElementById('messages').innerHTML += disconnectmessage + "<br>";
             });
             
