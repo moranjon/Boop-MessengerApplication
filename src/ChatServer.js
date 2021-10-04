@@ -26,12 +26,13 @@ socketio.on("connection", function (socketclient) {
             var welcomemessage = username + " has joined the chat system!";
             console.log(welcomemessage);
 
-            // LOGGED OUT FUNCTIONALITY - finish implementing in the future
+            // LOG OUT FUNCTIONALITY - finish implementing in the future
             //var loggedinmessage = "You are logged in as " + username;
             //socketio.sockets.emit("loggedin", loggedinmessage);
             
             userList.push(username);
-            console.log(userList);            
+            console.log(userList);
+            socketio.sockets.emit("Display userList", userList);            
             //socketio.sockets.emit("welcome", welcomemessage);
             SendToAuthenticatedClient(socketclient,"welcome", welcomemessage);
         }
@@ -78,6 +79,15 @@ socketio.on("connection", function (socketclient) {
         // make sure it only shows up if a user is actually logged into chat
         if(socketclient.username!=undefined){
         socketio.sockets.emit("disconnect", disconnectmessage);
+        //when a user disconnects, remove them from userList
+        const disconnectingUser = socketclient.username;        
+        for(var i = 0; i < userList.length; i++ ){
+            if(disconnectingUser == userList[i]){
+                userList.splice(i, 1);       
+                console.log(userList);
+                socketio.sockets.emit("Display userList", userList); 
+            }
+        }
         }
     });  
     
@@ -159,3 +169,4 @@ function sendPrivateMessage(senderclient,recipientName,type,data){
             console.log(logmsg);
     }
 }
+ 

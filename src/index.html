@@ -276,6 +276,19 @@
         <div id="pmessages"></div>
     </div>
 
+    <div id="Online Users"></div>
+Users: <br>
+    
+ 
+    <script>
+        socketio.on("Display userList",(userList) => {
+        document.getElementById('display users').innerHTML = userList + "<br>";
+        });
+    </script>
+ 
+    <div id="display users"></div>
+</div>
+
 </body>
 
 </html>
