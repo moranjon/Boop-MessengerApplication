@@ -40,7 +40,7 @@ Source code repository (private access): <https://bitbucket.org/cps490f21-team3/
 | Date     |   Version     |  Description |
 |----------|:-------------:|-------------:|
 |09/02/2021|  0.0          | Init draft   |
-(date will be posted once Version 1 is complete from Sprint 1)
+|10/04/2021|  1.0          | Sprint1 draft|
 
 
 # Overview
@@ -102,7 +102,7 @@ _(Start from Sprint 1, keep updating)_
 
 ## Use-Case Realization
 
-_(Start from Sprint 1, keep updating)_
+![Sprint-1 Use Cases](https://i.ibb.co/0j1wvRV/Sprint1-Use-Cases.png)
 
 ## Database 
 
@@ -111,10 +111,23 @@ _(Start from Sprint 3, keep updating)_
 ## User Interface
 
 Login Page: 
-- Describe the login page and how it will look (explain UI outlook)
+- Contains a Login and Password text box with a JOIN button
 
 Chat Page: 
-- Describe the chat page and how it will look (explain UI outlook)
+- Public Chat (user clicks on "PUBLIC" button):
+	-Displays the option to add a friend
+	-Displays online users
+	-has a message box to type in & a SEND button
+	-Displays when a user is typing
+	-Has a CLEAR MESSAGES button for the user to clear the current info in their chat box
+- Private Chat (user clicks on "PRIVATE" button):
+	-Displays the option to add a friend
+	-Displays online users
+	-has a recipient box to type a username to send a message to
+	-has a message box to type in & a SEND button (sends to recipient)
+	-Displays when a user is typing
+	-Has a CLEAR MESSAGES button for the user to clear the current info in their chat box
+
 _(Start from Sprint 1, keep updating)_
 
 # Implementation
@@ -148,7 +161,7 @@ Frontend: A text box appears in which a user types in the desired username of th
 
 Disconnected User
 Backend: listens for an event in which the user closes that tab and notifies the user. It also searches the userlIst for the user and removes it from the array.
-![friend](src=https://i.ibb.co/Rb0hvGm/Screenshot-172.png)
+![friend](https://i.ibb.co/Rb0hvGm/Screenshot-172.png)
 
 Clear Chat
 ![clear](https://i.ibb.co/27z43SC/Screenshot-184.png)
@@ -158,7 +171,7 @@ This project is being created by all four members. Each member is assigned tasks
 
 ## Deployment
 
-Describe how to deploy your system in a specific platform.
+We deployed out application via Heroku. Heroku allows us to have our web application actively running.
 
 # Software Process Management
 
