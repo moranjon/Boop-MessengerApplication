@@ -1,0 +1,66 @@
+body {background-color: rgb(255, 223, 223);}
+h1 {
+    color: red;
+    font-size: 80px;
+    text-align: center;
+}
+#loginUI {
+    margin: auto;
+    width: 45%;
+    border: 1px solid gray;
+    padding: 10px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: lightblue;
+}
+#chatUI {
+    background-color: lightblue; 
+    margin: auto;
+    width: 45%;
+    border: 1px solid gray;
+    padding: 10px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;               
+}
+#head {
+    font-family: Arial, Helvetica, sans-serif; 
+}  
+#messages {
+    text-align: left;
+}
+#friendUI {
+    background-color: lightblue; 
+    margin: auto;
+    width: 45%;
+    border: 1px solid gray;
+    padding: 10px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#landingUI {
+    background-color: lightblue; 
+    margin: auto;
+    width: 45%;
+    border: 1px solid gray;
+    padding: 10px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#privateUI {
+    background-color: lightblue; 
+    margin: auto;
+    width: 45%;
+    border: 1px solid gray;
+    padding: 10px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#usersUI {
+    background-color: lightblue; 
+    margin: auto;
+    width: 45%;
+    border: 1px solid gray;
+    padding: 10px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif; 
+}
