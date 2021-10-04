@@ -1,36 +1,306 @@
 <!DOCTYPE html>
 <html>
-    <head>
+
+<head>
         <meta charset="UTF-8">
         <title>Boop 0.1</title>
+        <!-- <link rel="stylesheet" type="text/css" href="frontend_style.css" /> -->
         <style>
             body {background-color: rgb(255, 223, 223);}
-            h1 {color: red;}
+            h1 {
+                color: red;
+                font-size: 80px;
+                text-align: center;
+            }
+            #loginUI {
+                margin: auto;
+                width: 45%;
+                border: 1px solid gray;
+                padding: 10px;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+                background-color: lightblue;
+            }
+            #chatUI {
+                background-color: lightblue; 
+                margin: auto;
+                width: 45%;
+                border: 1px solid gray;
+                padding: 10px;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;               
+            }
+            #head {
+                font-family: Arial, Helvetica, sans-serif; 
+            }  
+            #messages {
+                text-align: left;
+            }
+            #friendUI {
+                background-color: lightblue; 
+                margin: auto;
+                width: 45%;
+                border: 1px solid gray;
+                padding: 10px;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            #landingUI {
+                background-color: lightblue; 
+                margin: auto;
+                width: 45%;
+                border: 1px solid gray;
+                padding: 10px;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            #privateUI {
+                background-color: lightblue; 
+                margin: auto;
+                width: 45%;
+                border: 1px solid gray;
+                padding: 10px;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            #usersUI {
+                background-color: lightblue; 
+                margin: auto;
+                width: 45%;
+                border: 1px solid gray;
+                padding: 10px;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif; 
+            }
+                                    
         </style>
     </head>
-    <body>
-    <h1>Boop 0.1 Chatroom</h1>
-    <p>Developed by Team 3 in CPS490</p>
+
+<body>
+    <div id="head">
+        <h1>Boop 0.1</h1>
+    </div>
+    
     <script src="/socket.io/socket.io.js"></script>
     <!-- the main UI here -->
+    <div id="loginUI"> 
+        Please login first: <br>
+        <input type="text" id="username" placeholder="Enter your name ..."> <!-- prompts user to input username and password-->
+        <input type="password" id="password" placeholder="Password">
+        <button type="button" onclick="login()">JOIN</button>
 
-    <div id="chatUI">
-    Your Message:
-        <input type="text" id="message" placeholder="Enter your message ..."> 
-        <button type="button"
-        onclick="sendmessage()">Send</button>
-        
-        <script>
+        <script> // login function, sends login info to ChatServer and displays username in chat
             var socketio = io();
-            function sendmessage(){
+            function login() {
+                var username = document.getElementById('username').value;
+                var password = document.getElementById('password').value;
+                if (socketio)
+                    socketio.emit("login", username, password);
+            }
+            socketio.on("Welcome", (welcomemessage) => {
+                document.getElementById('messages').innerHTML += welcomemessage + "<br>";
+            });
+
+            
+            
+            socketio.on("authenticated", () => { // hides the login page and displays landing page and add friends bar
+                document.getElementById("loginUI").style.display = "none";
+                document.getElementById("landingUI").style.display = "block";
+                document.getElementById("chatUI").style.display = "none";
+                document.getElementById("friendUI").style.display = "none";
+                document.getElementById('welcomemessagediv').innerHTML +=
+                    "You are successfully logged in! You can start chatting now.<br>";
+                //document.getElementById("loggedInUI").style.display = "block";
+                document.getElementById("friendUI").style.display = "block";
+                document.getElementById("usersUI").style.display = "block";
+            });
+
+            // socketio.on("logout", () => {
+                //
+            //});
+        </script>
+        <br>
+    </div>
+
+    <!--
+    <div id="loggedInUI" style ="display:none">
+        <span id="top"></span>
+        <button type="button" onclick="logout()">Logout</button>
+        <script>
+            socketio.on("loggedin", (loggedinmessage) => {
+                document.getElementById('top').innerHTML = loggedinmessage;
+            }); 
+            
+            function logout() {
+                socketio.on("logout", (logoutmessage) => {
+                document.getElementById('messages').innerHTML += logoutmessage + "<br>";
+                });
+            }
+        </script>        
+    </div>
+    -->
+    <div id= "landingUI" style = "display:none;"> <!-- landing UI is used to direct users to eother public or private chat-->
+        Choose a mode of chat:
+
+        <button type="button" onclick="pubChat()">Public</button>
+        <button type="button" onclick="privChat()">Private</button>
+
+        <script>
+            function pubChat(){// script to hide others pages and dislay the public chat content division
+                document.getElementById("chatUI").style.display = "block";
+                document.getElementById("friendUI").style.display = "block";
+
+                document.getElementById("privateUI").style.display = "none";
+                document.getElementById("usersUI").style.display = "block";
+            }
+        </script>
+
+        <script>
+            function privChat(){ // script to hide other pages and display private chat content div
+                document.getElementById("privateUI").style.display = "block";
+                document.getElementById("friendUI").style.display = "block";
+
+                document.getElementById("chatUI").style.display = "none";
+                document.getElementById("usersUI").style.display = "block";
+            }
+        </script>
+        
+
+    
+    </div>
+
+    <div id="friendUI" style ="display:none;"> <!-- interface to add other users as friends by username-->
+        Add User as Friend:
+        <input type="text" id="friendName" placeholder="Enter friend's username ...">
+        <button type="button" onclick="addFriend()">Add</button>
+
+        <script>            
+            function addFriend() { //sends friend request to the chatserver based on friends name
+                socketio.emit("friend", document.getElementById('friendName').value);
+            }
+            socketio.on("friend", (friendText) => {
+                document.getElementById('messages').innerHTML += friendText + "<br>";
+            });
+        </script>
+        <div id="friendName"></div>
+    </div>
+
+    <div id="chatUI" style="display:none;"> <!-- public chat user interface-->
+        <br>
+        <title>Public Chat</title>
+        <br>
+        <br>
+        Your Message:
+        <input type="text" id="message" onkeypress="entertoSend(event)" onkeyup="sendTyping()" required="" placeholder="Enter your message ..."/>
+        <button type="button" onclick="sendmessage()">Send</button>
+        <button type="button" onclick="clearmessage()">Clear Messages</button>
+
+        <script>
+            function clearmessage(){ // script to clear the public chat message log
+                document.getElementById('messages').innerHTML = "";
+            }
+            function sendmessage() { //script that tells server to send message to public chat
                 socketio.emit("chat", document.getElementById('message').value);
+                document.getElementById("welcomemessagediv").style.display = "none";
             }
             socketio.on("chat", (chatmessage) => {
-                    document.getElementById('messages').innerHTML+= chatmessage + "<br>";
-                });
+                document.getElementById('messages').innerHTML += chatmessage + "<br>";                
+            });
+            socketio.on("disconnect", (disconnectmessage) => { //script that informs user in public chat log that a user has disconnected
+                document.getElementById('messages').innerHTML += disconnectmessage + "<br>";
+            });
+            
+            function sendTyping() {
+                socketio.emit("<TYPE>");
+                console.log('Sent to server: <TYPE>');
+            }
+            //Typing Functionality Implementation // " is typing <span>.</span>"
+            socketio.on("<TYPING>", function(msg){
+                // document.getElementById("typing").innerHTML = sanitizeHTML(msg) + " is typing."
+                document.getElementById("typing").innerHTML = msg + " is typing..."
+                setTimeout(function(){document.getElementById("typing").innerHTML = "<br>";},3000);
+                console.log('<TYPING>Received from server: ' + msg);
+            });
+
+    
+                        
         </script>
+        <div id="welcomemessagediv"></div>
+
+        <!-- Typing Functionality Implementation-->
+        <br>
+        <div id="typing"></div>
+        <!-- Message from server: -->
+        
+        <br>
         <div id="messages"></div>
     </div>
 
-    </body>
+    <div id="privateUI" style="display:none;">
+        <br>
+        <title>Private Chat</title>
+        <br>
+        <br>
+        Send private message to:
+        <input type="text" id="pusername" placeholder="Enter recipient">
+        <br>        
+        Your Message:
+        <input type="text" id="pmessage" onkeypress="entertoSend(event)" onkeyup="sendTyping()" required="" placeholder="Enter your message ..."/>
+        <button type="button" onclick="psendmessage()">Send</button>
+        <button type="button" onclick="pclearchat()">Clear Chat</button>
+        <script>
+            function pclearchat(){
+                document.getElementById('pmessages').innerHTML = "";
+            }
+            function psendmessage() {
+                socketio.emit("pchat", document.getElementById('pmessage').value, document.getElementById('pusername').value);
+                document.getElementById("pwelcomemessagediv").style.display = "none";
+            }
+            socketio.on("pchat", (chatmessage) => {
+                document.getElementById('pmessages').innerHTML += chatmessage + "<br>";                
+            });
+            socketio.on("disconnect", (disconnectmessage) => {
+                document.getElementById('pmessages').innerHTML += disconnectmessage + "<br>";
+            });
+            
+            function sendTyping() {
+                socketio.emit("<TYPE>");
+                console.log('Sent to server: <TYPE>');
+            }
+            //Typing Functionality Implementation // " is typing <span>.</span>"
+            socketio.on("<TYPING>", function(msg){
+                // document.getElementById("typing").innerHTML = sanitizeHTML(msg) + " is typing."
+                document.getElementById("ptyping").innerHTML = msg + " is typing..."
+                setTimeout(function(){document.getElementById("ptyping").innerHTML = "<br>";},1000);
+                console.log('<TYPING>Received from server: ' + msg);
+            });
+
+    
+                        
+        </script>
+        <div id="pwelcomemessagediv"></div>
+
+        <!-- Typing Functionality Implementation-->
+        <br>
+        <div id="ptyping"></div>
+        <!-- Message from server: -->
+        
+        <br>
+        <div id="pmessages"></div>
+    </div>
+
+    <div id="usersUI" style = "display:none;">
+    Online Users: <br>
+
+        <script>
+            socketio.on("Display userList",(userList) => {
+            document.getElementById('display users').innerHTML = userList + "<br>";
+            });
+        </script>
+    
+        <div id="display users"></div>
+    </div>
+
+</body>
+
 </html>
