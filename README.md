@@ -121,6 +121,33 @@ _(Start from Sprint 1, keep updating)_
 _(Start from Sprint 1, keep updating)_
 
 For each new sprint cycle, update the implementation of your system (break it down into subsections). It is helpful if you can include some code snippets to illustrate the implementation
+Login
+Backend:
+![login](https://i.ibb.co/kqZcbfz/Screenshot-170.png)
+Frontend:
+![login_front](https://i.ibb.co/sgh95pG/Screenshot-178.png)
+
+Public Chat
+Backend:
+![public](https://i.ibb.co/4pBtzgz/Screenshot-177.png)
+Frontend:
+![public_front](https://i.ibb.co/JcWJf74/Screenshot-181.png)
+
+Private Chat
+Backend:
+![private](https://i.ibb.co/nfSRpGh/Screenshot-176.png)
+Frontend:
+![private_front](https://i.ibb.co/KVhB73L/Screenshot-182.png)
+
+Add User as a friend
+Backend:
+![friend](https://i.ibb.co/71ttBwp/Screenshot-173.png)
+Frontend:
+![friend_front](https://i.ibb.co/VHJcXvv/Screenshot-180.png)
+
+Disconnected User
+![friend](src=https://i.ibb.co/Rb0hvGm/Screenshot-172.png)
+
 
 Specify the development approach of your team, including programming languages, database, development, testing, and deployment environments. 
 
