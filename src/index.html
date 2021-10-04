@@ -62,6 +62,15 @@
                 text-align: center;
                 font-family: Arial, Helvetica, sans-serif;
             }
+            #usersUI {
+                background-color: lightblue; 
+                margin: auto;
+                width: 45%;
+                border: 1px solid gray;
+                padding: 10px;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif; 
+            }
                                     
         </style>
     </head>
@@ -102,6 +111,7 @@
                     "You are successfully logged in! You can start chatting now.<br>";
                 //document.getElementById("loggedInUI").style.display = "block";
                 document.getElementById("friendUI").style.display = "block";
+                document.getElementById("usersUI").style.display = "block";
             });
 
             // socketio.on("logout", () => {
@@ -140,6 +150,7 @@
                 document.getElementById("friendUI").style.display = "block";
 
                 document.getElementById("privateUI").style.display = "none";
+                document.getElementById("usersUI").style.display = "block";
             }
         </script>
 
@@ -149,6 +160,7 @@
                 document.getElementById("friendUI").style.display = "block";
 
                 document.getElementById("chatUI").style.display = "none";
+                document.getElementById("usersUI").style.display = "block";
             }
         </script>
         
@@ -276,18 +288,17 @@
         <div id="pmessages"></div>
     </div>
 
-    <div id="Online Users"></div>
-Users: <br>
+    <div id="usersUI" style = "display:none;">
+    Online Users: <br>
+
+        <script>
+            socketio.on("Display userList",(userList) => {
+            document.getElementById('display users').innerHTML = userList + "<br>";
+            });
+        </script>
     
- 
-    <script>
-        socketio.on("Display userList",(userList) => {
-        document.getElementById('display users').innerHTML = userList + "<br>";
-        });
-    </script>
- 
-    <div id="display users"></div>
-</div>
+        <div id="display users"></div>
+    </div>
 
 </body>
 
