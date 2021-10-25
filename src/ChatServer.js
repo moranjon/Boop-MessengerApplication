@@ -16,30 +16,39 @@ console.log("Socket.IO is listening at port: " + port);
 socketio.on("connection", function (socketclient) {
     console.log("A new Socket.IO client is connected. ID= " + socketclient.id);
 
-    socketclient.on("login", (username,password) => {
+    // lab 3 merge
+    socketclient.on("register", async (username,password)=> {
+        const registation_result = await
+        DataLayer.addUser(username,password);
+        socketclient.emit("registration",registation_result)
+    })
+
+    // lab 3 merge
+    socketclient.on("login", async (username,password) => {
         console.log("Debug>Got username="+username + ";password="+password);
-        if(DataLayer.checklogin(username,password)){
+        var checklogin = await DataLayer.checklogin(username,password)
+        if(checklogin){
             socketclient.authenticated=true;
             socketclient.emit("authenticated");
             socketclient.username=username;
-            socketclient.recipient=""; // added for private messaging
-            var welcomemessage = username + " has joined the chat system!";
-            console.log(welcomemessage);
-
+            socketclient.recipient=""; // lab 3 merge - added for private messaging
+            
             // LOG OUT FUNCTIONALITY - finish implementing in the future
             //var loggedinmessage = "You are logged in as " + username;
             //socketio.sockets.emit("loggedin", loggedinmessage);
-            
+
             userList.push(username);
             console.log(userList);
-            socketio.sockets.emit("Display userList", userList);            
-            //socketio.sockets.emit("welcome", welcomemessage);
-            SendToAuthenticatedClient(socketclient,"welcome", welcomemessage);
+            socketio.sockets.emit("Display userList", userList); 
+
+            var welcomemessage = username + " has joined the chat system!";
+            console.log(welcomemessage);
+            SendToAuthenticatedClient(socketclient,"Welcome", welcomemessage);
         }
-        //socketclient.username = username;
-        //var welcomemessage = username + " has joined the chat system!";
-        //console.log(welcomemessage);
-        //socketio.sockets.emit("Welcome", welcomemessage);
+        else{
+            console.log("Invalid Login Emitted");
+            socketclient.emit("invalidLogin");
+        }
     });
 
     // A user logs out....
@@ -123,13 +132,20 @@ socketio.on("connection", function (socketclient) {
     });
 });
 
+var messengerdb=require("./messengerdb") // lab 3 merge
 var DataLayer = {
     info: 'Data Layer Implementation for Messenger',
-    checklogin(username,password){
-        //for testing only
-        console.log("checklogin: " + username + "/" + password);
-        console.log("Just for testing - return true");
-        return true;
+
+    async addUser(username,password){ // lab 3 merge
+        const result = await
+        messengerdb.addUser(username,password);
+        return result;
+    },
+
+    async checklogin(username,password){ // lab 3 merge
+        var checklogin_result = await messengerdb.checklogin(username,password)
+        console.log("Debug>DataLayer.checklogin->result=" + checklogin_result)
+        return checklogin_result
     }
 }
 
