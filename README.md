@@ -146,7 +146,6 @@ Backend: The ChatServer checks the login info and then compares it with informat
 
 
 ChatServer.js
-
 ![login](https://i.ibb.co/KxyPnz1/LOGIN.png)
 ![login2](https://i.ibb.co/S30WNnn/Data-Layer.png)
 messengerdb.js
@@ -211,8 +210,20 @@ Clear Chat
 
 SPRINT 2 IMPLEMENTATION:
 
-Registration: 
+Registration
 
+Backend: If the user name does not exist and is new, then the information (username and password) are inputted as new data into the database. If the username already exists then don't input duplicate data into the database.
+
+
+ChatServer.js
+![registerBack1](screenshot link)
+messengerdb.js
+![registerBack1](screenshot link)
+
+
+Frontend: BLAH BLAH
+
+![registerFront1](screenshot link)
 
 
 0. Specify the development approach of your team, including programming languages, database, development, testing, and deployment environments. 
