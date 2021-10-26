@@ -15,42 +15,54 @@ const getDb = () =>{
         throw Error("No database connection");
     return db;
 }
+function validateUsername(username){
+    return (username && username.length > 4);
+}
+function validatePassword(password){
+    //a validation requiring the password must be 6 chars or longer
+    //must contain at least one digit, one lower case, and one UPPERCASE
+    return /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(password); 
+}
 const  checklogin = async (username,password)=>{
     //your implementation
-    var users = getDb().collection("users");
-    var user = await users.findOne({username:username,password:password});
-    if (user!=null && user.username==username){
-        console.log("Debug>messengerdb.checklogin-> user found:\n" +
-        JSON.stringify(user))
-        return true
+    if(validatePassword(password)&&validateUsername(username)){
+        var users = getDb().collection("users");
+        var user = await users.findOne({username:username,password:password});
+        if (user!=null && user.username==username){
+            console.log("Debug>messengerdb.checklogin-> user found:\n" +
+            JSON.stringify(user))
+            return true
+        }
+        else {
+            return false
     }
-    else {
-        return false
-    }
+}
 }
 
 const addUser = async (username,password)=>{
     //your implementation
-    var users = getDb().collection("users");
-    var user = await users.findOne({username:username});
-    if (user!=null && user.username==username){
-        console.log(`Debug>messengerdb.addUser: Username '${username}' exists!`);
-        return "UserExist";
-    }
-    else {
-        const newUser = {"username": username,"password" : password}
-        try{
-            const result = await users.insertOne(newUser);
-            if(result!=null){
-            console.log("Debug>messengerdb.addUser: a new user added: \n", result);
-            return "Success";
+    if(validatePassword(password)&&validateUsername(username)){
+        var users = getDb().collection("users");
+        var user = await users.findOne({username:username});
+        if (user!=null && user.username==username){
+            console.log(`Debug>messengerdb.addUser: Username '${username}' exists!`);
+            return "UserExist";
         }
-        }catch{
-            console.log("Debug>messengerdb.addUser: error for adding '" +
-            username +"':\n", err);
-            return "Error";
-        }
+        else {
+            const newUser = {"username": username,"password" : password}
+            try{
+                const result = await users.insertOne(newUser);
+                if(result!=null){
+                    console.log("Debug>messengerdb.addUser: a new user added: \n", result);
+                    return "Success";
+                }
+            }catch{
+                console.log("Debug>messengerdb.addUser: error for adding '" +
+                username +"':\n", err);
+                return "Error";
+            }
     }
+}
 }
 
 module.exports = {checklogin,addUser};
