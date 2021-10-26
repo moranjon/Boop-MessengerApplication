@@ -184,7 +184,7 @@
                 if(validatePassword && validateUsername){
                     socketio.emit("register",username,password);
                 }
-                if(validatePassword == false || !validateUsername == false){
+                else if(validatePassword == false || !validateUsername == false){
                     alert("Invalid Registration! Username must be at least 5 characters long." + "\n Password must  contain at least one digit, one lower case, and one UPPERCASE");
                 }
             }
@@ -316,6 +316,8 @@
             }
             function sendmessage() { //script that tells server to send message to public chat
                 socketio.emit("chat", document.getElementById('message').value);
+                document.getElementById('message').value ="";
+
                 document.getElementById("welcomemessagediv").style.display = "none";
             }
             socketio.on("chat", (chatmessage) => {
@@ -369,6 +371,8 @@
             }
             function psendmessage() {
                 socketio.emit("pchat", document.getElementById('pmessage').value, document.getElementById('pusername').value);
+                document.getElementById('pmessage').value ="";
+
                 document.getElementById("pwelcomemessagediv").style.display = "none";
             }
             socketio.on("pchat", (chatmessage) => {
