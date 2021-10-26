@@ -27,15 +27,20 @@ socketio.on("connection", function (socketclient) {
     socketclient.on("login", async (username,password) => {
         console.log("Debug>Got username="+username + ";password="+password);
         var checklogin = await DataLayer.checklogin(username,password)
-        if(checklogin){
+        if (checklogin && userList.includes(username))
+        {
+            console.log("Duplicate User attempted login");
+            socketclient.emit("duplicateLogin");
+        }
+        else if(checklogin){
             socketclient.authenticated=true;
             socketclient.emit("authenticated");
             socketclient.username=username;
             socketclient.recipient=""; // lab 3 merge - added for private messaging
             
-            // LOG OUT FUNCTIONALITY - finish implementing in the future
-            //var loggedinmessage = "You are logged in as " + username;
-            //socketio.sockets.emit("loggedin", loggedinmessage);
+            // Show that a user is logged in (place this near "logout" button on index.html)
+            var loggedinmessage = "You are logged in as " + username;
+            socketio.sockets.emit("loggedin", loggedinmessage);
 
             userList.push(username);
             console.log(userList);
@@ -50,13 +55,6 @@ socketio.on("connection", function (socketclient) {
             socketclient.emit("invalidLogin");
         }
     });
-
-    // A user logs out....
-    //socketclient.on("logout", function() {
-    //    var logoutmessage = socketclient.username + " has logged out from the chat system."
-    //    console.log(logoutmessage);
-    //    socketio.sockets.emit("logout", logoutmessage);
-    //});
     
     socketclient.on("chat", (message) => {
         if(!socketclient.authenticated) {

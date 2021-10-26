@@ -6,7 +6,8 @@
         <title>Boop 0.1</title>
         <!-- <link rel="stylesheet" type="text/css" href="frontend_style.css" /> -->
         <style>
-            body {background-color: rgb(255, 223, 223);}
+            body {
+                background-color: rgb(255, 223, 223);}
             h1 {
                 color: red;
                 font-size: 80px;
@@ -38,6 +39,15 @@
             }
             #friendUI {
                 /*background-color: lightblue; */
+                margin: auto;
+                width: 45%;
+                border: 1px solid gray;
+                padding: 10px;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            #loggedInUI {
+                /*background-color: lightblue;*/ 
                 margin: auto;
                 width: 45%;
                 border: 1px solid gray;
@@ -111,7 +121,7 @@
             Do not have an account? Register here! </a>
         </div>
         
-        <div style="display:none;" id="registrationScreen",class="lightmode2">
+        <div style="display:none;" id="registrationScreen"class="lightmode2">
             Register your account: <br>
             <input type="text" id="newusername" placeholder="Enter your email as username ...">
             <input type="password" id="newpassword" placeholder="Select your password ...">
@@ -139,12 +149,16 @@
                 document.getElementById("friendUI").style.display = "none";
                 document.getElementById('welcomemessagediv').innerHTML +=
                     "You are successfully logged in! You can start chatting now.<br>";
-                //document.getElementById("loggedInUI").style.display = "block";
+                document.getElementById("loggedInUI").style.display = "block";
                 document.getElementById("friendUI").style.display = "block";
                 document.getElementById("usersUI").style.display = "block";
             });
             socketio.on("invalidLogin", () => {
                 document.getElementById("invalidLoginDiv").innerHTML = "Invalid Login - Please try again.";
+                //setTimeout(function(){document.getElementById("invalidLoginDiv").innerHTML = "<br>";},5000);
+            });
+            socketio.on("duplicateLogin", () => {
+                document.getElementById("invalidLoginDiv").innerHTML = "Duplicate Login - Client already logged in.";
                 //setTimeout(function(){document.getElementById("invalidLoginDiv").innerHTML = "<br>";},5000);
             });
 
@@ -196,27 +210,18 @@
                 var loginScreen = document.getElementById("loginScreen");
                 loginScreen.style.display = "block";//"none" is to hide
             }
-            // socketio.on("logout", () => {
-                //
-            //});
         </script>
         <br>
     </div>
 
-    <!--
-    <div id="loggedInUI" style ="display:none">
+    
+    <div id="loggedInUI" style ="display:none;" class="lightmode2">
         <span id="top"></span>
-        <button type="button" onclick="logout()">Logout</button>
+        <button onClick="window.location.reload();">Logout</button>
         <script>
             socketio.on("loggedin", (loggedinmessage) => {
                 document.getElementById('top').innerHTML = loggedinmessage;
             }); 
-            
-            function logout() {
-                socketio.on("logout", (logoutmessage) => {
-                document.getElementById('messages').innerHTML += logoutmessage + "<br>";
-                });
-            }
         </script>        
     </div>
     -->
@@ -225,6 +230,7 @@
 
         <button type="button" onclick="pubChat()">Public</button>
         <button type="button" onclick="privChat()">Private</button>
+        <button type="button" onclick="grpChat()">Group</button>
 
         <script>
             function pubChat(){// script to hide others pages and dislay the public chat content division
@@ -232,7 +238,9 @@
                 document.getElementById("friendUI").style.display = "block";
 
                 document.getElementById("privateUI").style.display = "none";
-                document.getElementById("usersUI").style.display = "block";
+                document.getElementById("groupUI").style.display = "none";
+                document.getElementById("groupHub").style.display = "block";
+                document.getElementById("addGroup").style.display = "block";
             }
 
             function privChat(){ // script to hide other pages and display private chat content div
@@ -240,7 +248,18 @@
                 document.getElementById("friendUI").style.display = "block";
 
                 document.getElementById("chatUI").style.display = "none";
-                document.getElementById("usersUI").style.display = "block";
+                document.getElementById("groupUI").style.display = "none";
+                document.getElementById("groupHub").style.display = "block";
+                document.getElementById("addGroup").style.display = "block";
+            }
+
+            function grpChat(){// script to hide others pages and dislay the public chat content division
+                document.getElementById("chatUI").style.display = "none";
+                document.getElementById("friendUI").style.display = "block";
+
+                document.getElementById("privateUI").style.display = "none";
+                document.getElementById("groupHub").style.display = "block";
+
             }
         </script>
     </div>
@@ -365,6 +384,88 @@
         <div id="pmessages"></div>
     </div>
 
+    <div id="groupHub" style="display:none;" class="lightmode2">
+    <br>
+    Group Chat
+    <br>
+    <br>
+    <input type="text" id="groupName" placeholder="Enter the name of the group">
+    <button type="button" onclick="createGroup(groupName)">Create Group Chat</button>
+    <script>
+        function createGroup(gName){
+            document.getElementById("groupUI").style.display = "none";
+            document.getElementById("groupHub").style.display = "block";
+            document.getElementById("addGroup").style.display = "block";
+        }
+    </script>
+
+    </div>
+    <div id = "addGroup" style = "display:none;" class="lightmode2">
+    <br>
+        Send group message to:
+        <input type="text" id="gusername" placeholder="Enter recipient">
+        <button type="button" onclick="addUsertoGroup(gusername)">Add</button>
+        <script>
+            function addUsertoGroup(gusername){
+                const groupList
+            }
+        </script>
+    </div>
+
+
+
+
+    <div id="groupUI" style="display:none;" class="lightmode2">
+        <br>
+        <title>Group Chat</title>
+        <br>
+        
+        <br>        
+        Your Message:
+        <input type="text" id="pmessage" onkeypress="entertoSend(event)" onkeyup="sendTyping()" required="" placeholder="Enter your message ..."/>
+        <button type="button" onclick="psendmessage()">Send</button>
+        <button type="button" onclick="pclearchat()">Clear Chat</button>
+        <script>
+            function pclearchat(){
+                document.getElementById('pmessages').innerHTML = "";
+            }
+            function psendmessage() {
+                socketio.emit("pchat", document.getElementById('pmessage').value, document.getElementById('pusername').value);
+                document.getElementById("pwelcomemessagediv").style.display = "none";
+            }
+            socketio.on("pchat", (chatmessage) => {
+                document.getElementById('pmessages').innerHTML += chatmessage + "<br>";                
+            });
+            socketio.on("disconnect", (disconnectmessage) => {
+                document.getElementById('pmessages').innerHTML += disconnectmessage + "<br>";
+            });
+            
+            function sendTyping() {
+                socketio.emit("<TYPE>");
+                console.log('Sent to server: <TYPE>');
+            }
+            //Typing Functionality Implementation // " is typing <span>.</span>"
+            socketio.on("<TYPING>", function(msg){
+                // document.getElementById("typing").innerHTML = sanitizeHTML(msg) + " is typing."
+                document.getElementById("ptyping").innerHTML = msg + " is typing..."
+                setTimeout(function(){document.getElementById("ptyping").innerHTML = "<br>";},1000);
+                console.log('<TYPING>Received from server: ' + msg);
+            });
+
+    
+                        
+        </script>
+        <div id="pwelcomemessagediv"></div>
+
+        <!-- Typing Functionality Implementation-->
+        <br>
+        <div id="ptyping"></div>
+        <!-- Message from server: -->
+        
+        <br>
+        <div id="pmessages"></div>
+    </div>
+
     <div id="usersUI" style = "display:none;" class="lightmode2">
     Online Users: <br>
 
@@ -395,6 +496,10 @@
                 var regScreen = document.getElementById("registrationScreen");
                 var privUI = document.getElementById("privateUI");
                 var usUI = document.getElementById("usersUI");
+                var grouUI = document.getElementById("groupUI");
+                var addgr = document.getElementById("addGroup");
+                var grouHub = document.getElementById("groupHub");
+                var loggUI = document.getElementById("loggedInUI");
 
                 element.className = "darkmode1";
                 privUI.className = "darkmode2";
@@ -406,6 +511,10 @@
                 logUI.className = "darkmode2";
                 chUI.className = "darkmode2";
                 usUI.className = "darkmode2";
+                grouUI.className = "darkmode2";
+                addgr.className = "darkmode2";
+                grouHub.className = "darkmode2";
+                loggUI.className = "darkmode2";
             }
             function lightmode(){// script to hide others pages and dislay the public chat content division
                 var element = document.body;
@@ -418,6 +527,11 @@
                 var usUI = document.getElementById("usersUI");
                 var invUI = document.getElementById("invalidLoginDiv");
                 var landUI = document.getElementById("landingUI");
+                var grouUI = document.getElementById("groupUI");
+                var addgr = document.getElementById("addGroup");
+                var grouHub = document.getElementById("groupHub");
+                var loggUI = document.getElementById("loggedInUI");
+
                 var element = document.body;
                 privUI.className = "lightmode2";
                 element.className = "lightmode1";
@@ -429,6 +543,10 @@
                 logUI.className = "lightmode2";
                 chUI.className = "lightmode2";
                 landUI.className = "lightmode2";
+                grouUI.className = "lightmode2";
+                addgr.className = "lightmode2";
+                grouHub.className = "lightmode2";
+                loggUI.className = "lightmode2";
             }
 
         </script>
