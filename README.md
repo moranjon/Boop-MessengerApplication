@@ -284,6 +284,8 @@ Non-functional requirements
 2. (2.5 points) All data must be sanitized in client-side before displaying
 3. (2.5 points) Enter in an input to send data, clear data after sending
 
+Lates Commit Link: (insert link here)
+
 #### Contributions: 
 
 1.  Jon Moran, 9-13 hours, Developer, contributed in planning, documentation, use cases(logout functionality), the slides/presentation
@@ -301,6 +303,7 @@ However, regardless of the bugs and issues we were very successful in working pr
 |          Good           |              Could have been better                |        How to improve?        |
 |-------------------------|:--------------------------------------------------:|------------------------------:|
 | Teamwork, Communication |  Organizing our ideas for "mock ups" of use cases  |  Better use case preparation  |
+
 
 
 -----------------------------------------------------------------------------
