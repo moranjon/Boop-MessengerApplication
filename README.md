@@ -115,6 +115,7 @@ Login Page:
 - Contains a Login and Password text box with a JOIN button
 
 Chat Page: 
+
 - Public Chat (user clicks on "PUBLIC" button):
 	
 	-Displays the option to add a friend
@@ -126,6 +127,7 @@ Chat Page:
 	-Displays when a user is typing
 	
 	-Has a CLEAR MESSAGES button for the user to clear the current info in their chat box
+
 
 - Private Chat (user clicks on "PRIVATE" button):
 	
