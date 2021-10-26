@@ -135,36 +135,61 @@ _(Start from Sprint 1, keep updating)_
 _(Start from Sprint 1, keep updating)_
 
 For each new sprint cycle, update the implementation of your system (break it down into subsections). It is helpful if you can include some code snippets to illustrate the implementation
+
 Login
 Backend: The ChatServer checks the login info and authenticates it if the information is balid or notifies the user if there is an error. It also welcomes the user into the chat and logs records the username and password. Lastly it logs the username into the UserList array. 
+
 ![login](https://i.ibb.co/kqZcbfz/Screenshot-170.png)
+
+
 Frontend: Users are prompted to input their username and password and then it is sent to the server to verify. If successfully authenticated the login div is hidden and the landing page and add friend divs are shown.
+
 ![login_front](https://i.ibb.co/sgh95pG/Screenshot-178.png)
+
 
 Public Chat
 Backend: The message is received from the front end and process by the backend. If the user is authenicated then the server returns the message notofyinbng all users who sent it.
+
 ![public](https://i.ibb.co/4pBtzgz/Screenshot-177.png)
+
+
 Frontend: A text field promts the user for the desired message and is then sent back to the server. It is then recepted from the server and displayed to the public chat window.
+
 ![public_front](https://i.ibb.co/JcWJf74/Screenshot-181.png)
+
 
 Private Chat
 Backend: Traverses socketId and chekcs if the username matches the intended recipient. If it does then the message is sent to oonly that user. The message is sent to the chatServer and the the ChatServer sends it back letting the recipient know which user it came from. If the intended recipients is not a registered user than it notifies the user and no message is sent. 
+
 ![private](https://i.ibb.co/nfSRpGh/Screenshot-176.png)
+
+
 Frontend: The front end has a text box to prompt the user for the recipients user name and another for the intended message. These two fields are sent to the chatServer and then a new message is recieved from the server and displayed to both users in the private chat.
+
 ![private_front](https://i.ibb.co/KVhB73L/Screenshot-182.png)
+
 
 Add User as a friend
 Backend: the desired username is compared to the active user list and if it matches a username it adds that user as a friend and sends the message back to the index.html page. If a user is not found then it tells the frontend that it was a failure and to input a valid username.
+
 ![friend](https://i.ibb.co/71ttBwp/Screenshot-173.png)
+
+
 Frontend: A text box appears in which a user types in the desired username of the user they want to add as a friend. Successfull or unsuccessful requests are communicated through public chat window
+
 ![friend_front](https://i.ibb.co/VHJcXvv/Screenshot-180.png)
+
 
 Disconnected User
 Backend: listens for an event in which the user closes that tab and notifies the user. It also searches the userlIst for the user and removes it from the array.
+
 ![friend](https://i.ibb.co/Rb0hvGm/Screenshot-172.png)
 
 Clear Chat
+
 ![clear](https://i.ibb.co/27z43SC/Screenshot-184.png)
+
+
 Specify the development approach of your team, including programming languages, database, development, testing, and deployment environments. 
 
 This project is being created by all four members. Each member is assigned tasks from the trello board and work on the according to the Gantt Chart. The front end of the site is created using html5 with styling done in CSS. The backend is created using javaScript, more specifically Node.js for the server. All editing is done in Google Cloud Shell Editor. Code is shared with each other using bitbucket, utilizing git commands to push and pull code. The site is deployed through heroku for free.
@@ -184,6 +209,7 @@ Jon Moran will serve as scrum manager this sprint. All use cases and tasks are o
 
 Trello Board Cards were created by team members with each use case serving as a card. In addition there is a goal for when we should complete each task. The goal timelines is more easily veiwed in the Gantt chart below. Once someone begins a task it will be moved to in progress and then upon completion moved to the completed list of the corresponding sprint.
 Also, include the Gantt chart reflects the timeline from the Trello board. _(Main focus of Sprint 0)_
+
 ![Gantt](https://i.ibb.co/6mSS6KJ/Software-Process-Management-Gantt.png)
 
 Each task is in a certain order. The basic steps are first so that we can build off of them for a future task. Each task is scheduled for a week and each team member was assigned a task to do that week. Timeline is subject to change if need be. 
