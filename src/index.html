@@ -362,10 +362,11 @@
     <br>
     Group Chat
     <br>
-    <br>>
-    <button type="button" onclick="createGroup()">Create Group Chat</button>
+    <br>
+    <input type="text" id="groupName" placeholder="Enter the name of the group">
+    <button type="button" onclick="createGroup(groupName)">Create Group Chat</button>
     <script>
-        function createGroup(){
+        function createGroup(gName){
             document.getElementById("groupUI").style.display = "none";
             document.getElementById("groupHub").style.display = "block";
             document.getElementById("addGroup").style.display = "block";
