@@ -224,7 +224,7 @@ Our retrospective meeting aided us in reflecting on our own indivudal performanc
 
 
 -------------------------------------------------------------------------------
-### Sprint 1 - IN PROGRESS
+### Sprint 1 - COMPLETE
 
 Duration: 09/09/2021 - 10-05-2021
 
@@ -259,6 +259,48 @@ Everyone worked together to fulfill their roles and the project progressed smoot
 | Good                                       |   Could have been better    |  How to improve?  |
 |--------------------------------------------|:---------------------------:|------------------:|
 |  Working together and focusing on the task |  Preplanning for task ideas |  Time management  |
+
+
+-----------------------------------------------------------------------------
+### Sprint 2 - IN PROGRESS
+
+Duration: 10/05/2021-10/26/2021
+
+#### Completed Tasks: 
+
+Functional
+1. Users need to login with username/password. Invalid username/password cannot be logged in
+2. Anyone can register for a new account to log in.
+3. Only logged-in users can send/receive messages (any)
+4. Logged-in users can logout
+5. (5 points) Logged-in users can create a group chat (more than 2 members)
+6. (5 points) Logged-in users in a group chat can send/receive messages from the group
+7. (5 points) Seperated chat window for group chat
+8. (10 points) Two use cases of your team choice
+	(a) Use case:  show password feature on login page
+	(b) Use case: user can switch between dark mode and light mode
+Non-functional requirements
+1. (2.5 points) All data must be validated in all layers before sending/checking/forwarding
+2. (2.5 points) All data must be sanitized in client-side before displaying
+3. (2.5 points) Enter in an input to send data, clear data after sending
+
+#### Contributions: 
+
+1.  Jon Moran, 9-13 hours, Developer, contributed in planning, documentation, use cases(logout functionality), the slides/presentation
+2.  John Conroy, 9-13 hours, Developer, contributed in planning, meeting scheduling, use cases(group chat functionality, DB login/authentication), the slides/presentation
+3.  James Oei, 9-13 hours, Product Owner, contributed in planning, system design, features, use cases(group chat functionality), the slides/presentation
+4.  Will Manzella, 9-13 hours, Scrum Master, contributed in planning, organization, CSS and UI, use cases(show password, darkmode/lightmode), the slides/presentation
+
+#### Sprint Retrospective:
+
+_(Introduction to Sprint Retrospective:
+
+Sprint 2 went a lot smoother in most aspects compared to previous sprints, but with midterms and busy schedules it was still hard to get to meet as often. We encountered multiple issues with the CSS; this included getting the external CSS to function properly and also our use case of darkmode/lightmode took a bit of debugging to get to work.
+However, regardless of the bugs and issues we were very successful in working productively and as a team to complete our tasks. Collaboration was important especially when we had to put our minds together to solve the functionality of adding a "group chat".
+
+|          Good           |              Could have been better                |        How to improve?        |
+|-------------------------|:--------------------------------------------------:|------------------------------:|
+| Teamwork, Communication |  Organizing our ideas for "mock ups" of use cases  |  Better use case preparation  |
 
 
 -----------------------------------------------------------------------------
