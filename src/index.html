@@ -122,10 +122,12 @@
         </div>
         
         <div style="display:none;" id="registrationScreen"class="lightmode2">
-            Register your account: <br>
+            Register your account: <br> <br>
+            Username must be at least 5 characters long <br>
+            Password must be 6 characters long and contain a digit, a lower case, and an upper case <br> <br>
             <input type="text" id="newusername" placeholder="Enter your email as username ...">
             <input type="password" id="newpassword" placeholder="Select your password ...">
-            <button type="button"onclick="register()">Register User</button><br>
+            <button type="button"onclick="register()">Register User</button><br> <br>
             <a href="#" onclick="hideRegistrationScreen();showLoginScreen()"> Login? </a>
         </div>
 
@@ -134,8 +136,21 @@
             function login() {
                 var username = document.getElementById('username').value;
                 var password = document.getElementById('password').value;
-                if (socketio)
+
+                if (validatePassword(password) && validateUsername(username) && socketio){
                     socketio.emit("login", username, password);
+                }
+                else{
+                    alert("Invalid Login. Please Try again or if you are new register an account");
+                }
+            }
+            function validateUsername(username){
+                return (username && username.length > 4);
+            }
+            function validatePassword(password){
+                //a validation requiring the password must be 6 chars or longer
+                //must contain at least one digit, one lower case, and one UPPERCASE
+                return /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(password); 
             }
             socketio.on("Welcome", (welcomemessage) => {
                 document.getElementById('messages').innerHTML += welcomemessage + "<br>";
@@ -166,7 +181,12 @@
                 var username = document.getElementById('newusername').value;
                 var password = document.getElementById('newpassword').value;
                 //TODO: validate username/password
-                socketio.emit("register",username,password);
+                if(validatePassword && validateUsername){
+                    socketio.emit("register",username,password);
+                }
+                if(validatePassword == false || !validateUsername == false){
+                    alert("Invalid Registration! Username must be at least 5 characters long." + "\n Password must  contain at least one digit, one lower case, and one UPPERCASE");
+                }
             }
             function showPass() {
                 var x = document.getElementById("password");
