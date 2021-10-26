@@ -116,17 +116,29 @@ Login Page:
 
 Chat Page: 
 - Public Chat (user clicks on "PUBLIC" button):
+	
 	-Displays the option to add a friend
+	
 	-Displays online users
+	
 	-has a message box to type in & a SEND button
+	
 	-Displays when a user is typing
+	
 	-Has a CLEAR MESSAGES button for the user to clear the current info in their chat box
+
 - Private Chat (user clicks on "PRIVATE" button):
+	
 	-Displays the option to add a friend
+	
 	-Displays online users
+	
 	-has a recipient box to type a username to send a message to
+	
 	-has a message box to type in & a SEND button (sends to recipient)
+	
 	-Displays when a user is typing
+	
 	-Has a CLEAR MESSAGES button for the user to clear the current info in their chat box
 
 _(Start from Sprint 1, keep updating)_
