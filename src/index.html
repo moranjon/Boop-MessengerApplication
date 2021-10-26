@@ -6,7 +6,8 @@
         <title>Boop 0.1</title>
         <!-- <link rel="stylesheet" type="text/css" href="frontend_style.css" /> -->
         <style>
-            body {background-color: rgb(255, 223, 223);}
+            body {
+                background-color: rgb(255, 223, 223);}
             h1 {
                 color: red;
                 font-size: 80px;
@@ -139,6 +140,10 @@
                 document.getElementById("invalidLoginDiv").innerHTML = "Invalid Login - Please try again.";
                 //setTimeout(function(){document.getElementById("invalidLoginDiv").innerHTML = "<br>";},5000);
             });
+            socketio.on("duplicateLogin", () => {
+                document.getElementById("invalidLoginDiv").innerHTML = "Duplicate Login - Client already logged in.";
+                //setTimeout(function(){document.getElementById("invalidLoginDiv").innerHTML = "<br>";},5000);
+            });
 
             function register(){
                 var username = document.getElementById('newusername').value;
@@ -199,6 +204,7 @@
 
         <button type="button" onclick="pubChat()">Public</button>
         <button type="button" onclick="privChat()">Private</button>
+        <button type="button" onclick="grpChat()">Group</button>
 
         <script>
             function pubChat(){// script to hide others pages and dislay the public chat content division
@@ -206,7 +212,9 @@
                 document.getElementById("friendUI").style.display = "block";
 
                 document.getElementById("privateUI").style.display = "none";
-                document.getElementById("usersUI").style.display = "block";
+                document.getElementById("groupUI").style.display = "none";
+                document.getElementById("groupHub").style.display = "block";
+                document.getElementById("addGroup").style.display = "block";
             }
 
             function privChat(){ // script to hide other pages and display private chat content div
@@ -214,7 +222,18 @@
                 document.getElementById("friendUI").style.display = "block";
 
                 document.getElementById("chatUI").style.display = "none";
-                document.getElementById("usersUI").style.display = "block";
+                document.getElementById("groupUI").style.display = "none";
+                document.getElementById("groupHub").style.display = "block";
+                document.getElementById("addGroup").style.display = "block";
+            }
+
+            function grpChat(){// script to hide others pages and dislay the public chat content division
+                document.getElementById("chatUI").style.display = "none";
+                document.getElementById("friendUI").style.display = "block";
+
+                document.getElementById("privateUI").style.display = "none";
+                document.getElementById("groupHub").style.display = "block";
+
             }
         </script>
     </div>
@@ -293,6 +312,88 @@
         <br>
         Send private message to:
         <input type="text" id="pusername" placeholder="Enter recipient">
+        <br>        
+        Your Message:
+        <input type="text" id="pmessage" onkeypress="entertoSend(event)" onkeyup="sendTyping()" required="" placeholder="Enter your message ..."/>
+        <button type="button" onclick="psendmessage()">Send</button>
+        <button type="button" onclick="pclearchat()">Clear Chat</button>
+        <script>
+            function pclearchat(){
+                document.getElementById('pmessages').innerHTML = "";
+            }
+            function psendmessage() {
+                socketio.emit("pchat", document.getElementById('pmessage').value, document.getElementById('pusername').value);
+                document.getElementById("pwelcomemessagediv").style.display = "none";
+            }
+            socketio.on("pchat", (chatmessage) => {
+                document.getElementById('pmessages').innerHTML += chatmessage + "<br>";                
+            });
+            socketio.on("disconnect", (disconnectmessage) => {
+                document.getElementById('pmessages').innerHTML += disconnectmessage + "<br>";
+            });
+            
+            function sendTyping() {
+                socketio.emit("<TYPE>");
+                console.log('Sent to server: <TYPE>');
+            }
+            //Typing Functionality Implementation // " is typing <span>.</span>"
+            socketio.on("<TYPING>", function(msg){
+                // document.getElementById("typing").innerHTML = sanitizeHTML(msg) + " is typing."
+                document.getElementById("ptyping").innerHTML = msg + " is typing..."
+                setTimeout(function(){document.getElementById("ptyping").innerHTML = "<br>";},1000);
+                console.log('<TYPING>Received from server: ' + msg);
+            });
+
+    
+                        
+        </script>
+        <div id="pwelcomemessagediv"></div>
+
+        <!-- Typing Functionality Implementation-->
+        <br>
+        <div id="ptyping"></div>
+        <!-- Message from server: -->
+        
+        <br>
+        <div id="pmessages"></div>
+    </div>
+
+    <div id="groupHub" style="display:none;">
+    <br>
+    Group Chat
+    <br>
+    <br>
+    <input type="text" id="groupName" placeholder="Enter the name of the group">
+    <button type="button" onclick="createGroup(groupName)">Create Group Chat</button>
+    <script>
+        function createGroup(gName){
+            document.getElementById("groupUI").style.display = "none";
+            document.getElementById("groupHub").style.display = "block";
+            document.getElementById("addGroup").style.display = "block";
+        }
+    </script>
+
+    </div>
+    <div id = "addGroup" style = "display:none;">
+    <br>
+        Send group message to:
+        <input type="text" id="gusername" placeholder="Enter recipient">
+        <button type="button" onclick="addUsertoGroup(gusername)">Add</button>
+        <script>
+            function addUsertoGroup(gusername){
+                const groupList
+            }
+        </script>
+    </div>
+
+
+
+
+    <div id="groupUI" style="display:none;">
+        <br>
+        <title>Group Chat</title>
+        <br>
+        
         <br>        
         Your Message:
         <input type="text" id="pmessage" onkeypress="entertoSend(event)" onkeyup="sendTyping()" required="" placeholder="Enter your message ..."/>
