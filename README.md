@@ -93,6 +93,12 @@ User Sends Image to Other User(s):
 User Sends Audio to Other User(s): 
 - When trying to send an image, the user will send their audio file
 
+Show Password:
+- When trying to login, a user can select a checkbox to show password
+
+Toggle Darkmode/Lightmode:
+- User can select a button to toggle between lightmode and darkmode for all UI
+
 _Draw the overview use case diagram, and define brief use case description for each use case (Main focus of Sprint 0)_
 
 
@@ -113,6 +119,11 @@ _(Start from Sprint 3, keep updating)_
 
 Login Page: 
 - Contains a Login and Password text box with a JOIN button
+- Contains a show password checkbox for showing password when signing in
+- Contains a register user link
+
+Register User Page:
+- Contains a username and password textbox for registering a new user with a Join button
 
 Chat Page: 
 
@@ -142,6 +153,17 @@ Chat Page:
 	-Displays when a user is typing
 	
 	-Has a CLEAR MESSAGES button for the user to clear the current info in their chat box
+	
+- Group Chat:
+	-Displays the option to add a friend to a chat
+	
+	-Displays online users
+	
+	-Displays who is typing
+	
+	-Allows users to send messages to multiple individuals in a group chat
+	
+	-Has a CLEAR MESSAGES button
 
 _(Start from Sprint 1, keep updating)_
 
