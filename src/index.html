@@ -6,7 +6,8 @@
         <title>Boop 0.1</title>
         <!-- <link rel="stylesheet" type="text/css" href="frontend_style.css" /> -->
         <style>
-            body {background-color: rgb(255, 223, 223);}
+            body {
+                background-color: rgb(255, 223, 223);}
             h1 {
                 color: red;
                 font-size: 80px;
@@ -128,6 +129,10 @@
             });
             socketio.on("invalidLogin", () => {
                 document.getElementById("invalidLoginDiv").innerHTML = "Invalid Login - Please try again.";
+                //setTimeout(function(){document.getElementById("invalidLoginDiv").innerHTML = "<br>";},5000);
+            });
+            socketio.on("duplicateLogin", () => {
+                document.getElementById("invalidLoginDiv").innerHTML = "Duplicate Login - Client already logged in.";
                 //setTimeout(function(){document.getElementById("invalidLoginDiv").innerHTML = "<br>";},5000);
             });
 

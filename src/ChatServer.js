@@ -27,7 +27,12 @@ socketio.on("connection", function (socketclient) {
     socketclient.on("login", async (username,password) => {
         console.log("Debug>Got username="+username + ";password="+password);
         var checklogin = await DataLayer.checklogin(username,password)
-        if(checklogin){
+        if (checklogin && userList.includes(username))
+        {
+            console.log("Duplicate User attempted login");
+            socketclient.emit("duplicateLogin");
+        }
+        else if(checklogin){
             socketclient.authenticated=true;
             socketclient.emit("authenticated");
             socketclient.username=username;
