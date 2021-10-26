@@ -248,7 +248,7 @@ SPRINT 2 IMPLEMENTATION:
 
 Registration
 
-Backend: If the user name does not exist and is new, then the information (username and password) are inputted as new data into the database. If the username already exists then don't input duplicate data into the database.
+	Backend: If the username does not exist and is new, then the information (username and password) are inputted as new data into the database. If the username already exists then don't input duplicate data into the database.
 
 
 ChatServer.js
@@ -257,9 +257,52 @@ messengerdb.js
 ![registerBack1](screenshot link)
 
 
-Frontend: BLAH BLAH
+	Frontend: The user inputs a unique username (at least 5 characters long) and a password (at least 6 characters, contains an upper case letter, lower case letter, and number), they'll be forwarded to the login screen.
 
 ![registerFront1](screenshot link)
+
+
+
+Logout
+
+	Frontend: The user hits the "Logout" button which then initiates the page to reset and disconnects them.
+
+![logout](https://i.ibb.co/wzw8PMm/logout.png)
+
+
+Unhide Password
+
+	Frontend: The user clicks on a checkbox that toggles the option to unhide or hide their password on their screen.
+
+![UnhidePassword](add link)
+
+Dark Mode / Light Mode Option
+
+	Frontend: explain Dark Mode / Light Mode code functionality 
+
+![DarkLight](add link)
+
+
+Group Chat 
+
+	Backend: explain backend functionality
+
+![GroupBackend1](add link)
+
+	Frontend: explain frontend functionality
+
+![GroupFrontend1](add link)
+
+
+Login Validation
+
+	Backend: explain backend functionality
+
+![ValidationBackend1](add link)
+
+	Frontend: explain frontend functionality
+
+![ValidationFrontend1](add link)
 
 
 0. Specify the development approach of your team, including programming languages, database, development, testing, and deployment environments. 
