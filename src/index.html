@@ -19,10 +19,10 @@
                 padding: 10px;
                 text-align: center;
                 font-family: Arial, Helvetica, sans-serif;
-                background-color: lightblue;
+                /*background-color: lightblue;*/
             }
             #chatUI {
-                background-color: lightblue; 
+                /*background-color: lightblue; */
                 margin: auto;
                 width: 45%;
                 border: 1px solid gray;
@@ -37,7 +37,7 @@
                 text-align: left;
             }
             #friendUI {
-                background-color: lightblue; 
+                /*background-color: lightblue; */
                 margin: auto;
                 width: 45%;
                 border: 1px solid gray;
@@ -46,7 +46,7 @@
                 font-family: Arial, Helvetica, sans-serif;
             }
             #landingUI {
-                background-color: lightblue; 
+                /*background-color: lightblue; */
                 margin: auto;
                 width: 45%;
                 border: 1px solid gray;
@@ -55,7 +55,7 @@
                 font-family: Arial, Helvetica, sans-serif;
             }
             #privateUI {
-                background-color: lightblue; 
+                /*background-color: lightblue; */
                 margin: auto;
                 width: 45%;
                 border: 1px solid gray;
@@ -64,13 +64,29 @@
                 font-family: Arial, Helvetica, sans-serif;
             }
             #usersUI {
-                background-color: lightblue; 
+                /*background-color: lightblue; */
                 margin: auto;
                 width: 45%;
                 border: 1px solid gray;
                 padding: 10px;
                 text-align: center;
                 font-family: Arial, Helvetica, sans-serif; 
+            }
+            #colorModeUI{
+                font-family: Arial, Helvetica, sans-serif; 
+            }
+            .darkmode1 {
+                background-color: gray;      
+            }
+            .darkmode2 {
+                background-color: rgb(131, 39, 100);   
+                color: white 
+            }
+            .lightmode1 {
+                background-color: rgb(255, 223, 223);  
+            }
+            .lightmode2 {
+                background-color: lightblue;  
             }
                                     
         </style>
@@ -83,18 +99,19 @@
     
     <script src="/socket.io/socket.io.js"></script>
     <!-- the main UI here -->
-    <div id="loginUI">
-        <div style="display:block;" id="loginScreen">
+    <div id="loginUI" class="lightmode2">
+        <div style="display:block;" id="loginScreen" class="lightmode2">
             Please login first: <br>
             <input type="text" id="username" placeholder="Enter your name ...">
             <input type="password" id="password" placeholder="Password">
             <button type="button" onclick="login()">JOIN</button>
+            <input type="checkbox" onclick="showPass()"> Show Password
             <div id="invalidLoginDiv" style="color:red;font-size:20px;"></div>
             <br><a href="#" onclick="showRegistrationScreen();hideLoginScreen()">
             Do not have an account? Register here! </a>
         </div>
         
-        <div style="display:none;" id="registrationScreen">
+        <div style="display:none;" id="registrationScreen",class="lightmode2">
             Register your account: <br>
             <input type="text" id="newusername" placeholder="Enter your email as username ...">
             <input type="password" id="newpassword" placeholder="Select your password ...">
@@ -137,6 +154,15 @@
                 //TODO: validate username/password
                 socketio.emit("register",username,password);
             }
+            function showPass() {
+                var x = document.getElementById("password");
+                if (x.type === "password") {
+                    x.type = "text";
+                } else {
+                    x.type = "password";
+                }
+            }
+
             socketio.on("registration", (result) => {
                 var username = document.getElementById('newusername').value;
                 if(result==="Success"){
@@ -194,7 +220,7 @@
         </script>        
     </div>
     -->
-    <div id= "landingUI" style = "display:none;"> <!-- landing UI is used to direct users to eother public or private chat-->
+    <div id= "landingUI" style = "display:none;" class="lightmode2"> <!-- landing UI is used to direct users to eother public or private chat-->
         Choose a mode of chat:
 
         <button type="button" onclick="pubChat()">Public</button>
@@ -219,7 +245,7 @@
         </script>
     </div>
 
-    <div id="friendUI" style ="display:none;"> <!-- interface to add other users as friends by username-->
+    <div id="friendUI" style ="display:none;" class="lightmode2"> <!-- interface to add other users as friends by username-->
         Add User as Friend:
         <input type="text" id="friendName" placeholder="Enter friend's username ...">
         <button type="button" onclick="addFriend()">Add</button>
@@ -232,10 +258,10 @@
                 document.getElementById('messages').innerHTML += friendText + "<br>";
             });
         </script>
-        <div id="friendName"></div>
+        <div id="friendName" class="lightmode2"></div>
     </div>
 
-    <div id="chatUI" style="display:none;"> <!-- public chat user interface-->
+    <div id="chatUI" style="display:none;" class="lightmode2"> <!-- public chat user interface-->
         <br>
         <title>Public Chat</title>
         <br>
@@ -286,7 +312,7 @@
         <div id="messages"></div>
     </div>
 
-    <div id="privateUI" style="display:none;">
+    <div id="privateUI" style="display:none;" class="lightmode2"> 
         <br>
         <title>Private Chat</title>
         <br>
@@ -339,7 +365,7 @@
         <div id="pmessages"></div>
     </div>
 
-    <div id="usersUI" style = "display:none;">
+    <div id="usersUI" style = "display:none;" class="lightmode2">
     Online Users: <br>
 
         <script>
@@ -349,6 +375,63 @@
         </script>
     
         <div id="display users"></div>
+
+    </div>
+    <div id= "colorModeUI" style = "display:block;"> <!-- landing UI is used to direct users to eother public or private chat-->
+        Choose a mode of chat:
+
+        <button type="button" onclick="darkmode()">Darkmode</button>
+        <button type="button" onclick="lightmode()">Lightmode</button>
+
+        <script>
+            function darkmode(){// script to hide others pages and dislay the public chat content division
+                var element = document.body;
+                var chUI = document.getElementById("chatUI");
+                var logUI = document.getElementById("loginUI");
+                var frUI = document.getElementById("friendUI");
+                var invUI = document.getElementById("invalidLoginDiv");
+                var landUI = document.getElementById("landingUI");
+                var logScreen = document.getElementById("loginScreen");
+                var regScreen = document.getElementById("registrationScreen");
+                var privUI = document.getElementById("privateUI");
+                var usUI = document.getElementById("usersUI");
+
+                element.className = "darkmode1";
+                privUI.className = "darkmode2";
+                logScreen.className = "darkmode2";
+                regScreen.className = "darkmode2";
+                landUI.className = "darkmode2";
+                invUI.className = "darkmode2";
+                frUI.className = "darkmode2";                
+                logUI.className = "darkmode2";
+                chUI.className = "darkmode2";
+                usUI.className = "darkmode2";
+            }
+            function lightmode(){// script to hide others pages and dislay the public chat content division
+                var element = document.body;
+                var chUI = document.getElementById("chatUI");
+                var privUI = document.getElementById("privateUI");
+                var logUI = document.getElementById("loginUI");
+                var logScreen = document.getElementById("loginScreen");
+                var regScreen = document.getElementById("registrationScreen");
+                var frUI = document.getElementById("friendUI");
+                var usUI = document.getElementById("usersUI");
+                var invUI = document.getElementById("invalidLoginDiv");
+                var landUI = document.getElementById("landingUI");
+                var element = document.body;
+                privUI.className = "lightmode2";
+                element.className = "lightmode1";
+                logScreen.className = "lightmode2";
+                usUI.className = "lightmode2"
+                regScreen.className = "lightmode2";
+                invUI.className = "lightmode2";
+                frUI.className = "lightmode2";
+                logUI.className = "lightmode2";
+                chUI.className = "lightmode2";
+                landUI.className = "lightmode2";
+            }
+
+        </script>
     </div>
 
 </body>
