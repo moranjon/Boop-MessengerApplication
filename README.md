@@ -143,11 +143,13 @@ SPRINT 1 IMPLEMENTATION:
 Login (updated Sprint 2)
 
 Backend: The ChatServer checks the login info and then compares it with information from messengerdb.js. It checks to see if the information is valid (exists in database); if it is valid it will allow the user to login --> if not then it notifies the user if there is an error. It also welcomes the user into the chat and logs records the username and password. Lastly it logs the username into the UserList array. 
-(first two screenshots are from ChatServer.js, the second from messengerdb.js)
+
+
+ChatServer.js
 
 ![login](https://i.ibb.co/KxyPnz1/LOGIN.png)
-
 ![login2](https://i.ibb.co/S30WNnn/Data-Layer.png)
+messengerdb.js
 
 ![login3](https://i.ibb.co/rpk0xdK/loginDB.png)
 
