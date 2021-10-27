@@ -225,9 +225,18 @@ socketio.on("connection", function (socketclient) {
         for (var groupN in socketclient.groups){ //loop through all the client's groups
             if (socketclient.groups[groupN].name == socketclient.currentGroup){ //if group == user's currentGroup
                 for (var mem in socketclient.groups[groupN].members){ //loop through all the members in the current group
-                    memberUsername = socketclient.groups[groupN].members[mem]; //current member's username 
-                    memSocket = getMemberSocket(memberUsername); //current member's socket
-                    memSocket.emit("gchat", chatmessage); //emit chat to current member's socket
+                    //for every member in this group
+                        //if this member is in the userList still, continue
+                        //otherwise, do nothing
+                    if (userList.includes(socketclient.groups[groupN].members[mem])){ //THIS CONDITION FIXES ERROR WHERE IT ATTEMPTS TO SEND CHAT TO SOMEONE IN THE GROUP BUT NOT CONNECTED
+                        memberUsername = socketclient.groups[groupN].members[mem]; //current member's username 
+                        memSocket = getMemberSocket(memberUsername); //current member's socket
+                        memSocket.emit("gchat", chatmessage); //emit chat to current member's socket
+                    }
+                    else{
+                        let oldMember = socketclient.groups[groupN].members[mem];
+                        console.log("GC - gChat - ERROR: Member disconnected, did not send message to member: " + oldMember);
+                    }
                 }
             }
         }
