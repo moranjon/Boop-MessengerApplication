@@ -110,7 +110,7 @@ _(Start from Sprint 1, keep updating)_
 
 ## Use-Case Realization
 
-![Sprint-1 Use Cases](https://i.ibb.co/0j1wvRV/Sprint1-Use-Cases.png)
+![Sprint-1 Use Cases](https://i.gyazo.com/573da3ee2c50598b6f2361bc9a55a686.png)
 
 ## Database 
 
