@@ -57,7 +57,7 @@ socketio.on("connection", function (socketclient) {
                 socketclient.currentGroup = null; //when a user enters a group chat, its name will be stored here
             
                 // Show that a user is logged in (place this near "logout" button on index.html)
-                var loggedinmessage = "You are logged in as " + username;
+                var loggedinmessage = "You are logged in.";    // as " + username; //this takes most recent logged in user and puts it on all pages
                 socketio.sockets.emit("loggedin", loggedinmessage);
 
                 userList.push(username);
@@ -78,6 +78,7 @@ socketio.on("connection", function (socketclient) {
         }
         
     });
+
     
     socketclient.on("chat", (message) => {
         if(!socketclient.authenticated) {
