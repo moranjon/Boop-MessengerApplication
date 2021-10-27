@@ -3,7 +3,7 @@
 
 <head>
         <meta charset="UTF-8">
-        <title>Boop 0.1</title>
+        <title>Boop 0.2</title>
         <!-- <link rel="stylesheet" type="text/css" href="frontend_style.css" /> -->
         <style>
             body {
@@ -148,7 +148,7 @@
 
 <body>
     <div id="head">
-        <h1>Boop 0.1</h1>
+        <h1>Boop 0.2</h1>
     </div>
     
     <script src="/socket.io/socket.io.js"></script>
@@ -288,7 +288,7 @@
             }); 
         </script>        
     </div>
-    -->
+    
     <div id= "landingUI" style = "display:none;" class="lightmode2"> <!-- landing UI is used to direct users to eother public or private chat-->
         Choose a mode of chat:
 
@@ -320,7 +320,7 @@
             }
 
             function grpChat(){// script to hide others pages and dislay the public chat content division
-                document.getElementById('gmessages').innerHTML = "";
+                document.getElementById('gmessages').innerHTML = ""; //this is currently wiping the chat every time you hit the group chat button
 
                 document.getElementById("chatUI").style.display = "none";
                 document.getElementById("friendUI").style.display = "block";
@@ -381,24 +381,20 @@
             
             function sendTyping() {
                 socketio.emit("<TYPE>");
-                console.log('Sent to server: <TYPE>');
+                //console.log('Sent to server: <TYPE>');
             }
             //Typing Functionality Implementation // " is typing <span>.</span>"
             socketio.on("<TYPING>", function(msg){
                 // document.getElementById("typing").innerHTML = sanitizeHTML(msg) + " is typing."
                 document.getElementById("typing").innerHTML = msg + " is typing..."
                 setTimeout(function(){document.getElementById("typing").innerHTML = "<br>";},3000);
-                console.log('<TYPING>Received from server: ' + msg);
+                //console.log('<TYPING>Received from server: ' + msg);
             });
          
         </script>
         <div id="welcomemessagediv"></div>
-
-        <!-- Typing Functionality Implementation-->
         <br>
         <div id="typing"></div>
-        <!-- Message from server: -->
-        
         <br>
         <div id="messages"></div>
     </div>
@@ -434,23 +430,19 @@
             
             function sendTyping() {
                 socketio.emit("<TYPE>");
-                console.log('Sent to server: <TYPE>');
+                //console.log('Sent to server: <TYPE>');
             }
             //Typing Functionality Implementation // " is typing <span>.</span>"
             socketio.on("<TYPING>", function(msg){
                 // document.getElementById("typing").innerHTML = sanitizeHTML(msg) + " is typing."
                 document.getElementById("ptyping").innerHTML = msg + " is typing..."
                 setTimeout(function(){document.getElementById("ptyping").innerHTML = "<br>";},1000);
-                console.log('<TYPING>Received from server: ' + msg);
+                //console.log('<TYPING>Received from server: ' + msg);
             });          
         </script>
         <div id="pwelcomemessagediv"></div>
-
-        <!-- Typing Functionality Implementation-->
         <br>
         <div id="ptyping"></div>
-        <!-- Message from server: -->
-        
         <br>
         <div id="pmessages"></div>
     </div>
@@ -459,7 +451,7 @@
 
     <!-- CREATING A GROUP CHAT TEXT BOX & BUTTON & FUNCTIONALITY -->
     <!-- GROUP CHAT ERROR DIV AT TOP -->
-    <div id="groupHub" style="display:none;">
+    <div id="groupHub" style="display:none;" class="lightmode2">
     
         <div id="groupChatDebug"></div>
     
@@ -478,10 +470,10 @@
                 document.getElementById('groupChatDebug').innerHTML = debugMessage;
         });
     </script>
-
     </div>
+
     <!-- ADDING MEMBER TO GROUP TEXT BOX AND BUTTON & FUNCTIONALITY -->
-    <div id="addMemberToGroup" style = "display:none;">
+    <div id="addMemberToGroup" style = "display:none;" class="lightmode2">
         Add member:
         <input type="text" id="memberName" placeholder="Member Name">
         To group:
@@ -496,6 +488,7 @@
             }
         </script>
     </div>
+
     <!-- JOINING A GROUP TEXT BOX AND BUTTON & FUNCTIONALITY -->
     <div id="joinGroup" style = "display:none;" class="lightmode2">
         Your Group Chats: 
@@ -528,8 +521,9 @@
             }
         </script>
     </div>
+
     <!-- ACTUAL GROUP CHAT ROOM SENDING AND RECEIVING MESSAGES -->
-    <div id="groupUI" style="display:none;">
+    <div id="groupUI" style="display:none;" class="lightmode2">
         <title>Group Chat</title>
         Your Message:
         <input type="text" id="gmessage" onkeypress="entertoSend(event)" onkeyup="sendTyping()" required="" placeholder="Enter your message ..."/>
@@ -582,6 +576,7 @@
         <div id="display users"></div>
 
     </div>
+
     <div id= "colorModeUI" style = "display:block;"> <!-- landing UI is used to direct users to eother public or private chat-->
         Choose a mode of chat:
 
@@ -600,10 +595,14 @@
                 var regScreen = document.getElementById("registrationScreen");
                 var privUI = document.getElementById("privateUI");
                 var usUI = document.getElementById("usersUI");
-                var grouUI = document.getElementById("groupUI");
-                var addgr = document.getElementById("addGroup");
-                var grouHub = document.getElementById("groupHub");
+                var grouUI = document.getElementById("groupUI"); //Group Chat Functionality
+                //var addgr = document.getElementById("addGroup"); //Outdated
+                var grouHub = document.getElementById("groupHub"); //Group Chat Functionality
                 var loggUI = document.getElementById("loggedInUI");
+                var addMem = document.getElementById("addMemberToGroup"); //Group Chat Functionality
+                var joinG = document.getElementById("joinGroup"); //Group Chat Functionality
+                
+                //<!-- groupHub, addMemberToGroup, joinGroup, groupUI -->
 
                 element.className = "darkmode1";
                 privUI.className = "darkmode2";
@@ -615,10 +614,14 @@
                 logUI.className = "darkmode2";
                 chUI.className = "darkmode2";
                 usUI.className = "darkmode2";
-                grouUI.className = "darkmode2";
-                addgr.className = "darkmode2";
-                grouHub.className = "darkmode2";
+                grouUI.className = "darkmode2"; //Group Chat Functionality
+                //addgr.className = "darkmode2"; //unused
+                grouHub.className = "darkmode2"; //Group Chat Functionality
                 loggUI.className = "darkmode2";
+                addMem.className = "darkmode2"; //Group Chat Functionality
+                joinG.className = "darkmode2"; //Group Chat Functionality
+                
+
             }
             function lightmode(){// script to hide others pages and dislay the public chat content division
                 var element = document.body;
@@ -631,11 +634,16 @@
                 var usUI = document.getElementById("usersUI");
                 var invUI = document.getElementById("invalidLoginDiv");
                 var landUI = document.getElementById("landingUI");
-                var grouUI = document.getElementById("groupUI");
-                var addgr = document.getElementById("addGroup");
-                var grouHub = document.getElementById("groupHub");
+                var grouUI = document.getElementById("groupUI");//Group Chat Functionality
+                //var addgr = document.getElementById("addGroup");//unused
+                var grouHub = document.getElementById("groupHub");//Group Chat Functionality
                 var loggUI = document.getElementById("loggedInUI");
+                var addMem = document.getElementById("addMemberToGroup");//Group Chat Functionality
+                var joinG = document.getElementById("joinGroup");//Group Chat Functionality
 
+
+                //<!-- groupHub, addMemberToGroup, joinGroup, groupUI -->
+                
                 var element = document.body;
                 privUI.className = "lightmode2";
                 element.className = "lightmode1";
@@ -647,10 +655,12 @@
                 logUI.className = "lightmode2";
                 chUI.className = "lightmode2";
                 landUI.className = "lightmode2";
-                grouUI.className = "lightmode2";
-                addgr.className = "lightmode2";
-                grouHub.className = "lightmode2";
+                grouUI.className = "lightmode2";//Group Chat Functionality
+                //addgr.className = "lightmode2"; //unused
+                grouHub.className = "lightmode2";//Group Chat Functionality
                 loggUI.className = "lightmode2";
+                addMem.className = "lightmode2";//Group Chat Functionality
+                joinG.className = "lightmode2";//Group Chat Functionality
             }
 
         </script>
