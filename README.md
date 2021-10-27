@@ -442,7 +442,7 @@ Non-functional requirements
 2. All data must be sanitized in client-side before displaying
 3. Enter in an input to send data, clear data after sending
 
-Lates Commit Link: (insert link here)
+Lates Commit Link: https://bitbucket.org/cps490f21-team3/cps490-project-team3/commits/ac6f6e33c9e5c8d59e335585cdc83d1d1c55eb3f
 
 #### Contributions: 
 
