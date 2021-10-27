@@ -290,9 +290,14 @@ Frontend: The user clicks on a checkbox that toggles the option to unhide or hid
 
 Dark Mode / Light Mode Option
 
-Frontend: explain Dark Mode / Light Mode code functionality 
+Frontend: The user can click "Dark Mode" or "Light Mode" buttons to toggle the color scheme of the current displayed webpage. Light mode is the default scheme.
 
-![DarkLight](add link)
+![DarkLight](https://i.gyazo.com/cc993075734a27b1985963c8b13cd46e.png)
+
+![DarkLight](https://i.gyazo.com/8ae0f7285f9282ae990f9d0d22265483.png)
+
+![DarkLight](https://i.gyazo.com/b9b41d75c487b86560569a2a981f7209.png)
+
 
 
 Group Chat 
@@ -426,16 +431,16 @@ Functional
 2. Anyone can register for a new account to log in.
 3. Only logged-in users can send/receive messages (any)
 4. Logged-in users can logout
-5. (5 points) Logged-in users can create a group chat (more than 2 members)
-6. (5 points) Logged-in users in a group chat can send/receive messages from the group
-7. (5 points) Seperated chat window for group chat
-8. (10 points) Two use cases of your team choice
+5. Logged-in users can create a group chat (more than 2 members)
+6. Logged-in users in a group chat can send/receive messages from the group
+7. Seperated chat window for group chat
+8. Two use cases of your team choice
 	(a) Use case:  show password feature on login page
 	(b) Use case: user can switch between dark mode and light mode
 Non-functional requirements
-1. (2.5 points) All data must be validated in all layers before sending/checking/forwarding
-2. (2.5 points) All data must be sanitized in client-side before displaying
-3. (2.5 points) Enter in an input to send data, clear data after sending
+1. All data must be validated in all layers before sending/checking/forwarding
+2. All data must be sanitized in client-side before displaying
+3. Enter in an input to send data, clear data after sending
 
 Lates Commit Link: (insert link here)
 
