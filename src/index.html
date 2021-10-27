@@ -538,6 +538,7 @@
             function gsendmessage() {
                 socketio.emit("gchat", document.getElementById('gmessage').value);
                 document.getElementById("gwelcomemessagediv").style.display = "none";
+                document.getElementById('gmessage').value ="";
             }
             
             socketio.on("gchat", (chatmessage) => {
