@@ -177,10 +177,10 @@ _(Start from Sprint 1, keep updating)_
 
 SPRINT 1 IMPLEMENTATION:
 
+
 Login (updated Sprint 2)
 
 Backend: The ChatServer checks the login info and then compares it with information from messengerdb.js. It checks to see if the information is valid (exists in database); if it is valid it will allow the user to login --> if not then it notifies the user if there is an error. It also welcomes the user into the chat and logs records the username and password. Lastly it logs the username into the UserList array. 
-
 
 
 ![login](https://i.ibb.co/KxyPnz1/LOGIN.png)
@@ -197,6 +197,7 @@ Frontend: Users are prompted to input their username and password and then it is
 ![login_front2](https://i.ibb.co/W6YS9hF/loginfront2.png)
 
 
+
 Public Chat
 
 Backend: The message is received from the front end and process by the backend. If the user is authenicated then the server returns the message notofyinbng all users who sent it.
@@ -207,6 +208,7 @@ Backend: The message is received from the front end and process by the backend. 
 Frontend: A text field promts the user for the desired message and is then sent back to the server. It is then recepted from the server and displayed to the public chat window.
 
 ![public_front](https://i.ibb.co/JcWJf74/Screenshot-181.png)
+
 
 
 Private Chat
@@ -221,7 +223,8 @@ Frontend: The front end has a text box to prompt the user for the recipients use
 ![private_front](https://i.ibb.co/KVhB73L/Screenshot-182.png)
 
 
-Add User as a friend
+
+Add User as a Friend
 
 Backend: the desired username is compared to the active user list and if it matches a username it adds that user as a friend and sends the message back to the index.html page. If a user is not found then it tells the frontend that it was a failure and to input a valid username.
 
@@ -239,6 +242,8 @@ Backend: listens for an event in which the user closes that tab and notifies the
 
 ![friend](https://i.ibb.co/Rb0hvGm/Screenshot-172.png)
 
+
+
 Clear Chat
 
 Frontend
@@ -249,20 +254,21 @@ Frontend
 
 SPRINT 2 IMPLEMENTATION:
 
+
 Registration
 
-Backend: If the username does not exist and is new, then the information (username and password) are inputted as new data into the database. If the username already exists then don't input duplicate data into the database.
+Backend: If the username does not exist and is new, then the information (username and password) are inputted as new data into the database; as long as the information is a unique username (at least 5 characters long) and a password (at least 6 characters, contains an upper case letter, lower case letter, and number). If the username already exists then don't input duplicate data into the database.
 
 
 
-![registerBack1](screenshot link)
+![registerBack1](https://i.ibb.co/LvPzPxr/register-back-end1.png)
 
-![registerBack1](screenshot link)
+![registerBack2](https://i.ibb.co/2WkVM9X/register-back-end2.png)
 
 
 Frontend: The user inputs a unique username (at least 5 characters long) and a password (at least 6 characters, contains an upper case letter, lower case letter, and number), they'll be forwarded to the login screen.
 
-![registerFront1](screenshot link)
+![registerFront1](https://i.ibb.co/0FKJ5TJ/register-front-end.png)
 
 
 
@@ -273,11 +279,14 @@ Frontend: The user hits the "Logout" button which then initiates the page to res
 ![logout](https://i.ibb.co/wzw8PMm/logout.png)
 
 
+
 Unhide Password
 
 Frontend: The user clicks on a checkbox that toggles the option to unhide or hide their password on their screen.
 
-![UnhidePassword](add link)
+![UnhidePassword](https://i.gyazo.com/94aacc21863b93f0ed4f481507e7e816.png)
+
+
 
 Dark Mode / Light Mode Option
 
@@ -297,15 +306,19 @@ Frontend: explain frontend functionality
 ![GroupFrontend1](add link)
 
 
+
 Login Validation
 
 Backend: explain backend functionality
 
 ![ValidationBackend1](add link)
 
+
 Frontend: explain frontend functionality
 
 ![ValidationFrontend1](add link)
+
+
 
 
 0. Specify the development approach of your team, including programming languages, database, development, testing, and deployment environments. 
