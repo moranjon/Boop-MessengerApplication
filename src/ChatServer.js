@@ -14,50 +14,69 @@ var io = require('socket.io');
 var socketio = io.listen(server);
 console.log("Socket.IO is listening at port: " + port);
 
+function validateUsername(username){
+    return (username && username.length > 4);
+}
+function validatePassword(password){
+    //a validation requiring the password must be 6 chars or longer
+    //must contain at least one digit, one lower case, and one UPPERCASE
+    return /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(password); 
+}
+
 socketio.on("connection", function (socketclient) {
     console.log("A new Socket.IO client is connected. ID= " + socketclient.id);
 
     // lab 3 merge
     socketclient.on("register", async (username,password)=> {
-        const registation_result = await
-        DataLayer.addUser(username,password);
-        socketclient.emit("registration",registation_result)
+        if(validateUsername(username) && validatePassword){
+            const registation_result = await
+            DataLayer.addUser(username,password);
+            socketclient.emit("registration",registation_result)}
+        else(socketclient.emit("invalid registration"))
     })
 
     // lab 3 merge
     /* GROUP CHAT FUNCTIONALITY HERE : socketclient.groups[], socketclient.currentGroup*/  
     socketclient.on("login", async (username,password) => {
         console.log("Debug>Got username="+username + ";password="+password);
-        var checklogin = await DataLayer.checklogin(username,password)
-        if (checklogin && userList.includes(username))
-        {
-            console.log("Duplicate User attempted login");
-            socketclient.emit("duplicateLogin");
-        }
-        else if(checklogin){
-            socketclient.authenticated=true;
-            socketclient.emit("authenticated");
-            socketclient.username=username;
-            socketclient.recipient=""; // lab 3 merge - added for private messaging
-            socketclient.groups=[] //an array of groups that each socket is in / has
-            socketclient.currentGroup = null; //when a user enters a group chat, its name will be stored here
+        if(validatePassword(password)&&validateUsername(username)){
+
+        
+            var checklogin = await DataLayer.checklogin(username,password)
+            if (checklogin && userList.includes(username))
+            {
+                console.log("Duplicate User attempted login");
+                socketclient.emit("duplicateLogin");
+            }
+            else if(checklogin){
+                socketclient.authenticated=true;
+                socketclient.emit("authenticated");
+                socketclient.username=username;
+                socketclient.recipient=""; // lab 3 merge - added for private messaging
+                socketclient.groups=[] //an array of groups that each socket is in / has
+                socketclient.currentGroup = null; //when a user enters a group chat, its name will be stored here
             
-            // Show that a user is logged in (place this near "logout" button on index.html)
-            var loggedinmessage = "You are logged in as " + username;
-            socketio.sockets.emit("loggedin", loggedinmessage);
+                // Show that a user is logged in (place this near "logout" button on index.html)
+                var loggedinmessage = "You are logged in as " + username;
+                socketio.sockets.emit("loggedin", loggedinmessage);
 
-            userList.push(username);
-            console.log(userList);
-            socketio.sockets.emit("Display userList", userList); 
+                userList.push(username);
+                console.log(userList);
+                socketio.sockets.emit("Display userList", userList); 
 
-            var welcomemessage = username + " has joined the chat system!";
-            console.log(welcomemessage);
-            SendToAuthenticatedClient(socketclient,"Welcome", welcomemessage);
-        }
+                var welcomemessage = username + " has joined the chat system!";
+                console.log(welcomemessage);
+                SendToAuthenticatedClient(socketclient,"Welcome", welcomemessage);
+            }
+            else{
+                console.log("Invalid Login Emitted");
+                socketclient.emit("invalidLogin");
+            }}
         else{
-            console.log("Invalid Login Emitted");
-            socketclient.emit("invalidLogin");
+            console.log("Invalid login");
+            socketclient.emit("invalid login");
         }
+        
     });
     
     socketclient.on("chat", (message) => {
