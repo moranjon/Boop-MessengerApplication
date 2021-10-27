@@ -309,14 +309,10 @@ Frontend: explain frontend functionality
 
 Login Validation
 
-Backend: explain backend functionality
+Backend and Frontend: These functions were added into the index, ChatServer and messengerdb. These functions are called before transmitting the data to the next data layer. This ensures that a user has a valid login at every stage of the process.
 
-![ValidationBackend1](add link)
+![ValidationBackend1](https://i.ibb.co/PDDDjsr/Screenshot-222.png)
 
-
-Frontend: explain frontend functionality
-
-![ValidationFrontend1](add link)
 
 
 
