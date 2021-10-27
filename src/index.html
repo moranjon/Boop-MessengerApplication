@@ -159,7 +159,8 @@
         <div style="display:block;" id="loginScreen" class="lightmode2">
             Please login first: <br>
             <input type="text" id="username" placeholder="Enter your name ...">
-            <input type="password" id="password" placeholder="Password">
+            <input type="password" id="password" placeholder="Password"
+            onkeydown = "checkEnter(event)">            
             <button type="button" onclick="login()">JOIN</button>
             <input type="checkbox" onclick="showPass()"> Show Password
             <div id="invalidLoginDiv" style="color:red;font-size:20px;"></div>
@@ -189,6 +190,9 @@
                 else{
                     alert("Invalid Login. Please Try again or if you are new register an account");
                 }
+            }
+            function checkEnter(event){
+                if(event.key === "Enter") login()
             }
             function validateUsername(username){
                 return (username && username.length > 4);
@@ -360,11 +364,14 @@
         <br>
         <br>
         Your Message:
-        <input type="text" id="message" onkeypress="entertoSend(event)" onkeyup="sendTyping()" required="" placeholder="Enter your message ..."/>
+        <input type="text" id="message" onkeypress="entertoSend(event)" onkeyup="sendTyping()" required="" placeholder="Enter your message ..." onkeydown="checkEnterP(event)"/>
         <button type="button" onclick="sendmessage()">Send</button>
         <button type="button" onclick="clearmessage()">Clear Messages</button>
 
         <script>
+            function checkEnterP(event){
+                if(event.key === "Enter") sendmessage()
+            }
             function clearmessage(){ // script to clear the public chat message log
                 document.getElementById('messages').innerHTML = "";
             }
@@ -410,10 +417,13 @@
         <input type="text" id="pusername" placeholder="Enter recipient">
         <br>        
         Your Message:
-        <input type="text" id="pmessage" onkeypress="entertoSend(event)" onkeyup="sendTyping()" required="" placeholder="Enter your message ..."/>
+        <input type="text" id="pmessage" onkeydown="checkEnterPC(event)" onkeyup="sendTyping()" required="" placeholder="Enter your message ..."/>
         <button type="button" onclick="psendmessage()">Send</button>
         <button type="button" onclick="pclearchat()">Clear Chat</button>
         <script>
+             function checkEnterPC(event){
+                if(event.key === "Enter") psendmessage()
+            }
             function pclearchat(){
                 document.getElementById('pmessages').innerHTML = "";
             }
@@ -459,9 +469,12 @@
     
     <title>Group Chat</title>
     Create new group chat:
-    <input type="text" id="gName" placeholder="Group Chat Name">
+    <input type="text" id="gName" placeholder="Group Chat Name" onkeydown="checkEnterC(event)">
     <button type="button" onclick="createGroup()">Create</button>
     <script>
+        function checkEnterC(event){
+                if(event.key === "Enter") createGroup()
+            }
         function createGroup(){
             var groupName = document.getElementById('gName').value;
             socketio.emit("createGroup", groupName);
@@ -479,10 +492,13 @@
         Add member:
         <input type="text" id="memberName" placeholder="Member Name">
         To group:
-        <input type="text" id="groupChatName" placeholder="Group Chat Name">
+        <input type="text" id="groupChatName" placeholder="Group Chat Name" onkeydown="checkEnterA(event)">
         <button type="button" onclick="addUsertoGroup()">Add</button>
         
         <script>
+            function checkEnterA(event){
+                if(event.key === "Enter") addUsertoGroup()
+            }
             function addUsertoGroup(){
                 var groupChatName = document.getElementById('groupChatName').value;
                 var memberName = document.getElementById('memberName').value;
@@ -503,10 +519,13 @@
         <div id="chatList"></div>
         
         Enter Group Chat Room:
-        <input type="text" id="gChatName" placeholder="Group Chat Name">
+        <input type="text" id="gChatName" placeholder="Group Chat Name" onkeydown="checkEnterJ(event)">
         <button type="button" onclick="enterGroupChat()">Join</button>
         
         <script>
+            function checkEnterJ(event){
+                if(event.key === "Enter") enterGroupChat()
+            }
             function enterGroupChat(){
                 //groupHub, addMemberToGroup, joinGroup, groupUI
                 var gChatName = document.getElementById('gChatName').value;                
@@ -528,10 +547,13 @@
     <div id="groupUI" style="display:none;" class="lightmode2">
         <title>Group Chat</title>
         Your Message:
-        <input type="text" id="gmessage" onkeypress="entertoSend(event)" onkeyup="sendTyping()" required="" placeholder="Enter your message ..."/>
+        <input type="text" id="gmessage" onkeydown="checkEnterG(event)" onkeyup="sendTyping()" required="" placeholder="Enter your message ..."/>
         <button type="button" onclick="gsendmessage()">Send</button>
         <button type="button" onclick="gclearchat()">Clear Chat</button>
         <script>
+            function checkEnterG(event){
+                if(event.key === "Enter") gsendmessage()
+            }
             function gclearchat(){
                 document.getElementById('gmessages').innerHTML = "";
             }
