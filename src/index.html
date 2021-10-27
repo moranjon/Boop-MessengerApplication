@@ -82,6 +82,51 @@
                 text-align: center;
                 font-family: Arial, Helvetica, sans-serif; 
             }
+            #groupHub {
+                background-color: lightblue; 
+                margin: auto;
+                width: 45%;
+                border: 1px solid gray;
+                padding: 10px;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif; 
+            }
+            #addMemberToGroup {
+                background-color: lightblue; 
+                margin: auto;
+                width: 45%;
+                border: 1px solid gray;
+                padding: 10px;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif; 
+            }
+            #joinGroup {
+                background-color: lightblue; 
+                margin: auto;
+                width: 45%;
+                border: 1px solid gray;
+                padding: 10px;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif; 
+            }
+            #groupUI {
+                background-color: lightblue; 
+                margin: auto;
+                width: 45%;
+                border: 1px solid gray;
+                padding: 10px;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif; 
+            }
+            #groupChatDebug {
+                background-color: lightblue; 
+                margin: auto;
+                width: 45%;
+                padding: 10px;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif; 
+            }
+            
                                     
         </style>
     </head>
@@ -213,8 +258,9 @@
 
                 document.getElementById("privateUI").style.display = "none";
                 document.getElementById("groupUI").style.display = "none";
-                document.getElementById("groupHub").style.display = "block";
-                document.getElementById("addGroup").style.display = "block";
+                document.getElementById("groupHub").style.display = "none";
+                document.getElementById("addGroup").style.display = "none";
+                document.getElementById("joinGroup").style.display = "none";
             }
 
             function privChat(){ // script to hide other pages and display private chat content div
@@ -223,16 +269,22 @@
 
                 document.getElementById("chatUI").style.display = "none";
                 document.getElementById("groupUI").style.display = "none";
-                document.getElementById("groupHub").style.display = "block";
-                document.getElementById("addGroup").style.display = "block";
+                document.getElementById("groupHub").style.display = "none";
+                document.getElementById("addGroup").style.display = "none";
+                document.getElementById("joinGroup").style.display = "none";
             }
 
             function grpChat(){// script to hide others pages and dislay the public chat content division
+                document.getElementById('gmessages').innerHTML = "";
+
                 document.getElementById("chatUI").style.display = "none";
                 document.getElementById("friendUI").style.display = "block";
-
                 document.getElementById("privateUI").style.display = "none";
+
+                document.getElementById("groupUI").style.display = "none";
                 document.getElementById("groupHub").style.display = "block";
+                document.getElementById("addMemberToGroup").style.display = "block";
+                document.getElementById("joinGroup").style.display = "block";
 
             }
         </script>
@@ -253,6 +305,7 @@
         </script>
         <div id="friendName"></div>
     </div>
+    <br>
 
     <div id="chatUI" style="display:none;"> <!-- public chat user interface-->
         <br>
@@ -290,9 +343,7 @@
                 setTimeout(function(){document.getElementById("typing").innerHTML = "<br>";},3000);
                 console.log('<TYPING>Received from server: ' + msg);
             });
-
-    
-                        
+         
         </script>
         <div id="welcomemessagediv"></div>
 
@@ -342,10 +393,7 @@
                 document.getElementById("ptyping").innerHTML = msg + " is typing..."
                 setTimeout(function(){document.getElementById("ptyping").innerHTML = "<br>";},1000);
                 console.log('<TYPING>Received from server: ' + msg);
-            });
-
-    
-                        
+            });          
         </script>
         <div id="pwelcomemessagediv"></div>
 
@@ -358,87 +406,120 @@
         <div id="pmessages"></div>
     </div>
 
+    <!-- BEGIN GROUP CHAT FUNCTIONALITY -->
+
+    <!-- CREATING A GROUP CHAT TEXT BOX & BUTTON & FUNCTIONALITY -->
+    <!-- GROUP CHAT ERROR DIV AT TOP -->
     <div id="groupHub" style="display:none;">
-    <br>
-    Group Chat
-    <br>
-    <br>
-    <input type="text" id="groupName" placeholder="Enter the name of the group">
-    <button type="button" onclick="createGroup(groupName)">Create Group Chat</button>
+    
+        <div id="groupChatDebug"></div>
+    
+    <title>Group Chat</title>
+    Create new group chat:
+    <input type="text" id="gName" placeholder="Group Chat Name">
+    <button type="button" onclick="createGroup()">Create</button>
     <script>
-        function createGroup(gName){
-            document.getElementById("groupUI").style.display = "none";
-            document.getElementById("groupHub").style.display = "block";
-            document.getElementById("addGroup").style.display = "block";
+        function createGroup(){
+            var groupName = document.getElementById('gName').value;
+            socketio.emit("createGroup", groupName);
+            socketio.emit("getGroupChats");
         }
+
+        socketio.on("gcDebug",(debugMessage) => {
+                document.getElementById('groupChatDebug').innerHTML = debugMessage;
+        });
     </script>
 
     </div>
-    <div id = "addGroup" style = "display:none;">
-    <br>
-        Send group message to:
-        <input type="text" id="gusername" placeholder="Enter recipient">
-        <button type="button" onclick="addUsertoGroup(gusername)">Add</button>
+    <!-- ADDING MEMBER TO GROUP TEXT BOX AND BUTTON & FUNCTIONALITY -->
+    <div id="addMemberToGroup" style = "display:none;">
+        Add member:
+        <input type="text" id="memberName" placeholder="Member Name">
+        To group:
+        <input type="text" id="groupChatName" placeholder="Group Chat Name">
+        <button type="button" onclick="addUsertoGroup()">Add</button>
+        
         <script>
-            function addUsertoGroup(gusername){
-                const groupList
+            function addUsertoGroup(){
+                var groupChatName = document.getElementById('groupChatName').value;
+                var memberName = document.getElementById('memberName').value;
+                socketio.emit("addMember", groupChatName, memberName);
             }
         </script>
     </div>
-
-
-
-
-    <div id="groupUI" style="display:none;">
-        <br>
-        <title>Group Chat</title>
-        <br>
-        
-        <br>        
-        Your Message:
-        <input type="text" id="pmessage" onkeypress="entertoSend(event)" onkeyup="sendTyping()" required="" placeholder="Enter your message ..."/>
-        <button type="button" onclick="psendmessage()">Send</button>
-        <button type="button" onclick="pclearchat()">Clear Chat</button>
+    <!-- JOINING A GROUP TEXT BOX AND BUTTON & FUNCTIONALITY -->
+    <div id="joinGroup" style = "display:none;">
+        Your Group Chats: 
         <script>
-            function pclearchat(){
-                document.getElementById('pmessages').innerHTML = "";
+            socketio.emit("getGroupChats");
+            socketio.on("displayGroupChats",(chatList) => {
+                document.getElementById('chatList').innerHTML = chatList + "<br>";
+            });
+        </script>
+        <div id="chatList"></div>
+        
+        Enter Group Chat Room:
+        <input type="text" id="gChatName" placeholder="Group Chat Name">
+        <button type="button" onclick="enterGroupChat()">Join</button>
+        
+        <script>
+            function enterGroupChat(){
+                //groupHub, addMemberToGroup, joinGroup, groupUI
+                var gChatName = document.getElementById('gChatName').value;                
+                socketio.emit("isUserInGroup", gChatName);                
+                socketio.on("userInGroup",(inGroup) => {
+                    if (inGroup){
+                        document.getElementById("groupUI").style.display = "block";
+                        document.getElementById("groupHub").style.display = "none";
+                        document.getElementById("addMemberToGroup").style.display = "block";
+                        document.getElementById("joinGroup").style.display = "none";
+                    }
+                });
+                
             }
-            function psendmessage() {
-                socketio.emit("pchat", document.getElementById('pmessage').value, document.getElementById('pusername').value);
-                document.getElementById("pwelcomemessagediv").style.display = "none";
+        </script>
+    </div>
+    <!-- ACTUAL GROUP CHAT ROOM SENDING AND RECEIVING MESSAGES -->
+    <div id="groupUI" style="display:none;">
+        <title>Group Chat</title>
+        Your Message:
+        <input type="text" id="gmessage" onkeypress="entertoSend(event)" onkeyup="sendTyping()" required="" placeholder="Enter your message ..."/>
+        <button type="button" onclick="gsendmessage()">Send</button>
+        <button type="button" onclick="gclearchat()">Clear Chat</button>
+        <script>
+            function gclearchat(){
+                document.getElementById('gmessages').innerHTML = "";
             }
-            socketio.on("pchat", (chatmessage) => {
-                document.getElementById('pmessages').innerHTML += chatmessage + "<br>";                
+            function gsendmessage() {
+                socketio.emit("gchat", document.getElementById('gmessage').value);
+                document.getElementById("gwelcomemessagediv").style.display = "none";
+            }
+            
+            socketio.on("gchat", (chatmessage) => {
+                document.getElementById('gmessages').innerHTML += chatmessage + "<br>";                
             });
             socketio.on("disconnect", (disconnectmessage) => {
-                document.getElementById('pmessages').innerHTML += disconnectmessage + "<br>";
+                document.getElementById('gmessages').innerHTML += disconnectmessage + "<br>";
             });
             
             function sendTyping() {
                 socketio.emit("<TYPE>");
-                console.log('Sent to server: <TYPE>');
+                //console.log('Sent to server: <TYPE>');
             }
-            //Typing Functionality Implementation // " is typing <span>.</span>"
             socketio.on("<TYPING>", function(msg){
                 // document.getElementById("typing").innerHTML = sanitizeHTML(msg) + " is typing."
-                document.getElementById("ptyping").innerHTML = msg + " is typing..."
-                setTimeout(function(){document.getElementById("ptyping").innerHTML = "<br>";},1000);
-                console.log('<TYPING>Received from server: ' + msg);
-            });
-
-    
-                        
+                document.getElementById("gtyping").innerHTML = msg + " is typing..."
+                setTimeout(function(){document.getElementById("gtyping").innerHTML = "<br>";},1000);
+                //console.log('<TYPING>Received from server: ' + msg);
+            });    
         </script>
-        <div id="pwelcomemessagediv"></div>
-
-        <!-- Typing Functionality Implementation-->
-        <br>
-        <div id="ptyping"></div>
-        <!-- Message from server: -->
-        
-        <br>
-        <div id="pmessages"></div>
+        <div id="gwelcomemessagediv"></div> <br>
+        <div id="gtyping"></div> <br>
+        <div id="gmessages"></div>
     </div>
+    <br>
+
+    <!-- END GROUP CHAT FUNCTIONALITY -->
 
     <div id="usersUI" style = "display:none;">
     Online Users: <br>
