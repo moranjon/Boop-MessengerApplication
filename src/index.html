@@ -461,8 +461,7 @@
 
     <!-- BEGIN GROUP CHAT FUNCTIONALITY -->
 
-    <!-- CREATING A GROUP CHAT TEXT BOX & BUTTON & FUNCTIONALITY -->
-    <!-- GROUP CHAT ERROR DIV AT TOP -->
+    <!-- CREATING A GROUP CHAT - GROUP CHAT DEBUG DIV AT TOP -->
     <div id="groupHub" style="display:none;" class="lightmode2">
     
         <div id="groupChatDebug"></div>
@@ -487,7 +486,7 @@
     </script>
     </div>
 
-    <!-- ADDING MEMBER TO GROUP TEXT BOX AND BUTTON & FUNCTIONALITY -->
+    <!-- ADDING MEMBER TO GROUP -->
     <div id="addMemberToGroup" style = "display:none;" class="lightmode2">
         Add member:
         <input type="text" id="memberName" placeholder="Member Name">
@@ -507,7 +506,7 @@
         </script>
     </div>
 
-    <!-- JOINING A GROUP TEXT BOX AND BUTTON & FUNCTIONALITY -->
+    <!-- JOINING A GROUP -->
     <div id="joinGroup" style = "display:none;" class="lightmode2">
         Your Group Chats: 
         <script>
@@ -517,17 +516,14 @@
             });
         </script>
         <div id="chatList"></div>
-        
         Enter Group Chat Room:
         <input type="text" id="gChatName" placeholder="Group Chat Name" onkeydown="checkEnterJ(event)">
         <button type="button" onclick="enterGroupChat()">Join</button>
-        
         <script>
             function checkEnterJ(event){
                 if(event.key === "Enter") enterGroupChat()
             }
             function enterGroupChat(){
-                //groupHub, addMemberToGroup, joinGroup, groupUI
                 var gChatName = document.getElementById('gChatName').value;                
                 socketio.emit("isUserInGroup", gChatName);                
                 socketio.on("userInGroup",(inGroup) => {
@@ -538,12 +534,11 @@
                         document.getElementById("joinGroup").style.display = "none";
                     }
                 });
-                
             }
         </script>
     </div>
 
-    <!-- ACTUAL GROUP CHAT ROOM SENDING AND RECEIVING MESSAGES -->
+    <!-- GROUP CHAT ROOM -->
     <div id="groupUI" style="display:none;" class="lightmode2">
         <title>Group Chat</title>
         Your Message:
@@ -562,23 +557,19 @@
                 document.getElementById("gwelcomemessagediv").style.display = "none";
                 document.getElementById('gmessage').value ="";
             }
-            
             socketio.on("gchat", (chatmessage) => {
                 document.getElementById('gmessages').innerHTML += chatmessage + "<br>";                
             });
             socketio.on("disconnect", (disconnectmessage) => {
                 document.getElementById('gmessages').innerHTML += disconnectmessage + "<br>";
             });
-            
             function sendTyping() {
                 socketio.emit("<TYPE>");
-                //console.log('Sent to server: <TYPE>');
             }
             socketio.on("<TYPING>", function(msg){
                 // document.getElementById("typing").innerHTML = sanitizeHTML(msg) + " is typing."
                 document.getElementById("gtyping").innerHTML = msg + " is typing..."
                 setTimeout(function(){document.getElementById("gtyping").innerHTML = "<br>";},1000);
-                //console.log('<TYPING>Received from server: ' + msg);
             });    
         </script>
         <div id="gwelcomemessagediv"></div> <br>

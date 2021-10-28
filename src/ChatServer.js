@@ -156,7 +156,8 @@ socketio.on("connection", function (socketclient) {
     /* BEGIN GROUP CHAT FUNCTIONALITY */    
     socketclient.on("createGroup", (groupName) => {
         createGroupChat(groupName, socketclient);
-        //creator client now has their name in the group.members[], and the new group is in their groups[]
+        //creator client now has their name in the group.members[], 
+        //and the new group is in their groups[]
     });
 
     socketclient.on("addMember", (groupName, memberName) => {
@@ -188,7 +189,8 @@ socketio.on("connection", function (socketclient) {
         for (var g in socketclient.groups){
             chatList += socketclient.groups[g].name + ", ";
         }
-        socketclient.emit("displayGroupChats", chatList); //return updated list of a user's groups
+        //return updated list of a user's groups
+        socketclient.emit("displayGroupChats", chatList);
     }); 
 
     socketclient.on("isUserInGroup", (gChatName) => {
@@ -226,10 +228,7 @@ socketio.on("connection", function (socketclient) {
         for (var groupN in socketclient.groups){ //loop through all the client's groups
             if (socketclient.groups[groupN].name == socketclient.currentGroup){ //if group == user's currentGroup
                 for (var mem in socketclient.groups[groupN].members){ //loop through all the members in the current group
-                    //for every member in this group
-                        //if this member is in the userList still, continue
-                        //otherwise, do nothing
-                    if (userList.includes(socketclient.groups[groupN].members[mem])){ //THIS CONDITION FIXES ERROR WHERE IT ATTEMPTS TO SEND CHAT TO SOMEONE IN THE GROUP BUT NOT CONNECTED
+                    if (userList.includes(socketclient.groups[groupN].members[mem])){ //wont msg those in group that disconnected
                         memberUsername = socketclient.groups[groupN].members[mem]; //current member's username 
                         memSocket = getMemberSocket(memberUsername); //current member's socket
                         memSocket.emit("gchat", chatmessage); //emit chat to current member's socket
@@ -399,8 +398,6 @@ function overwriteGroup(newGroup, memberSocket){ //given membersocket, loops thr
     }
 }
 
-//COULD HAVE AN ISSUE WITH THIS, RETURNS A COPY OF MEMBERS SOCKET BUT NOT THE ACTUAL SOCKET?
-    //INSTEAD, RETURN THE INDEX OF THE SOCKET OR SOCKETID TO MAKE IT EASIER - INSTEAD OF LOOPING THROUGH ALL SOCKETS?
 //Returns a user's socket, given a user's username
 function getMemberSocket(memberUsername){
     var sockets = socketio.sockets.sockets;
