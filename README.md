@@ -2,9 +2,6 @@
 
 Source: <https://bitbucket.org/capstones-cs-udayton/cps490/src/master/README.md>
 
-*NOTE*: _This is just a tentative template for your team to start working on sprint 0. It is a minimum requirement for your project final report and can be updated later.
-Your team can revise/add more sections, however, it is highly recommended to seek approval from the instructor for a pull request._
-
 University of Dayton
 
 Department of Computer Science
@@ -41,7 +38,6 @@ Source code repository (private access): <https://bitbucket.org/cps490f21-team3/
 |----------|:-------------:|-------------:|
 |09/02/2021|  0.0          | Init draft   |
 |10/04/2021|  1.0          | Sprint1 draft|
-|10/27/2021|  2.0          | Sprint1 draft|
 
 
 # Overview
@@ -52,8 +48,6 @@ _(Start from Sprint 0, keep updating)_
 # System Analysis
 
 ![Architecture](https://i.ibb.co/XpDx0nR/boop-Architecture.png)
-
-_(Start from Sprint 0, keep updating)_
 
 ## User Requirements
 
@@ -166,11 +160,9 @@ Chat Page:
 	
 	-Has a CLEAR MESSAGES button
 
-_(Start from Sprint 1, keep updating)_
 
 # Implementation
 
-_(Start from Sprint 1, keep updating)_
 
 0. For each new sprint cycle, update the implementation of your system (break it down into subsections). It is helpful if you can include some code snippets to illustrate the implementation
 
@@ -205,7 +197,7 @@ Backend: The message is received from the front end and process by the backend. 
 ![public](https://i.ibb.co/4pBtzgz/Screenshot-177.png)
 
 
-Frontend: A text field promts the user for the desired message and is then sent back to the server. It is then recepted from the server and displayed to the public chat window.
+Frontend: A text field prompts the user for the desired message and is then sent back to the server. It is then recepted from the server and displayed to the public chat window.
 
 ![public_front](https://i.ibb.co/JcWJf74/Screenshot-181.png)
 
@@ -375,7 +367,6 @@ We deployed out application via Heroku. Heroku allows us to have our web applica
 
 # Software Process Management
 
-_(Start from Sprint 0, keep updating)_
 
 Jon Moran will serve as scrum manager this sprint. All use cases and tasks are on a trello board and we divided up the task so that everyone has something to complete each week. Everyday at our weekly meeting we discuss any stoppages or if any one needs any help completing their tasks.
 
@@ -542,6 +533,4 @@ Finally, this meeting should improve your next sprint drastically and understand
 
 # User guide/Demo
 
-Write as a demo with screenshots and as a guide for users to use your system.
-
-_(Start from Sprint 1, keep updating)_
+Write as a demo with screenshots and as a guide for users to use for system.
