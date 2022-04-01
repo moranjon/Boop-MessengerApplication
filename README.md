@@ -43,7 +43,6 @@ Source code repository (private access): <https://bitbucket.org/cps490f21-team3/
 # Overview
 
 Our application is a messenger app that will allow users to create an account, login, and send messages to a single or multiple users — privately and publicly. Users will be able to add friends (or contacts) in order to communicate. They'll be able to send audio and images to each other while chatting. 
-_(Start from Sprint 0, keep updating)_
 
 # System Analysis
 
@@ -100,7 +99,6 @@ _Draw the overview use case diagram, and define brief use case description for e
 # System Design
 
 ![Interaction_Diagram](https://i.ibb.co/6PbsvBg/System-Design.png)
-_(Start from Sprint 1, keep updating)_
 
 ## Use-Case Realization
 
