@@ -108,7 +108,7 @@ _(Start from Sprint 1, keep updating)_
 
 ## Database 
 
-_(Start from Sprint 3, keep updating)_
+Database is managed by utilizing MongoDB. User information can be inputted by the user on the frontend and is updated and stored in the DB.
 
 ## User Interface
 
