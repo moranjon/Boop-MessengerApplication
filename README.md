@@ -2,6 +2,9 @@
 
 Source: <https://bitbucket.org/capstones-cs-udayton/cps490/src/master/README.md>
 
+*NOTE*: _This is just a tentative template for your team to start working on sprint 0. It is a minimum requirement for your project final report and can be updated later.
+Your team can revise/add more sections, however, it is highly recommended to seek approval from the instructor for a pull request._
+
 University of Dayton
 
 Department of Computer Science
@@ -38,6 +41,8 @@ Source code repository (private access): <https://bitbucket.org/cps490f21-team3/
 |----------|:-------------:|-------------:|
 |09/02/2021|  0.0          | Init draft   |
 |10/04/2021|  1.0          | Sprint1 draft|
+|10/27/2021|  2.0          | Sprint2 draft|
+|12/02/2021|  3.0          | Sprint3 Final|
 
 
 # Overview
@@ -47,6 +52,7 @@ Our application is a messenger app that will allow users to create an account, l
 # System Analysis
 
 ![Architecture](https://i.ibb.co/XpDx0nR/boop-Architecture.png)
+
 
 ## User Requirements
 
@@ -81,12 +87,6 @@ Public/Private Group Message:
 User Group Message: 
 - When trying to send a group message, will be able to communicate through text to that specific group
 
-User Sends Image to Other User(s): 
-- When trying to send an image, the user will send their image file
-
-User Sends Audio to Other User(s): 
-- When trying to send an image, the user will send their audio file
-
 Show Password:
 - When trying to login, a user can select a checkbox to show password
 
@@ -99,6 +99,7 @@ _Draw the overview use case diagram, and define brief use case description for e
 # System Design
 
 ![Interaction_Diagram](https://i.ibb.co/6PbsvBg/System-Design.png)
+
 
 ## Use-Case Realization
 
@@ -195,7 +196,7 @@ Backend: The message is received from the front end and process by the backend. 
 ![public](https://i.ibb.co/4pBtzgz/Screenshot-177.png)
 
 
-Frontend: A text field prompts the user for the desired message and is then sent back to the server. It is then recepted from the server and displayed to the public chat window.
+Frontend: A text field promts the user for the desired message and is then sent back to the server. It is then recepted from the server and displayed to the public chat window.
 
 ![public_front](https://i.ibb.co/JcWJf74/Screenshot-181.png)
 
@@ -352,6 +353,32 @@ Backend and Frontend: These functions were added into the index, ChatServer and 
 ![ValidationBackend1](https://i.ibb.co/PDDDjsr/Screenshot-222.png)
 
 
+![storeLoadPublicChat](https://i.ibb.co/pKT5Pn3/1.png)
+The storePublicChat method stores public chat messages in the database with their relevant data, such as receiver, timestamp, time, and the message. The loadChatHistory method loads public chat messages previously stored in the database into the html, displaying the time and chat message.
+
+![storeLoadPrivateChat](https://i.ibb.co/Y3LnR6L/2.png)
+The storePrivateChat method stores private chat messages in the database with their relevant data, such as receiver, timestamp, time, and the message. The loadPrivateChatHistory method loads private chat messages previously stored in the database into the html, displaying the time and chat message.
+
+![storeLoadGroupChat](https://i.ibb.co/f9vsKvX/3.png)
+The storeGroupChat method stores Group chat messages in the database with their relevant data, such groupName, timestamp, time, and the message. The loadGroupChatHistory method loads group chat messages previously stored in the database into the html, displaying the time and chat message.
+
+![loadChatinChatServer](https://i.ibb.co/XVz1p7h/4.png)
+This method calls the loadChatHistory method with a username, and returns the relevant chat history and emits to the index.html file.
+
+![loadChatinIndex](https://i.ibb.co/F5qWH6R/5.png)
+This is the code in the index.html file that is given the chat history and displays it in the html.
+
+![XSSExample](https://i.ibb.co/WGcmrtw/6.png)
+The 3rd line in this screenshot shows the XSS prevention code which has been inserted all over our code. Anywhere a textbox allows input, and this input enters our code, this XSSFilter is inserted at the beginning of this text’s journey.
+
+![encryptCheckLogin](https://i.ibb.co/B6vCr1G/7.png)
+The checkLogin method has been updated to verify that the username exists, then it returns true or false depending on if the encrypted password matches the plaintext password. 
+
+![encryptRegistration](https://i.ibb.co/WzzVZSz/8.png)
+When registering a new account, the new password is encrypted through hashing before being stored in the database.
+
+![pipeline](https://i.ibb.co/42Vs06z/9.png)
+This is the bitbucket-pipelines.yml file showing our successful implementation of Docker and the pipeline.
 
 
 
@@ -372,7 +399,7 @@ Jon Moran will serve as scrum manager this sprint. All use cases and tasks are o
 
 
 Trello Board Cards were created by team members with each use case serving as a card. In addition there is a goal for when we should complete each task. The goal timelines is more easily veiwed in the Gantt chart below. Once someone begins a task it will be moved to in progress and then upon completion moved to the completed list of the corresponding sprint.
-Also, include the Gantt chart reflects the timeline from the Trello board. _(Main focus of Sprint 0)_
+Also, include the Gantt chart reflects the timeline from the Trello board. 
 
 ![Gantt](https://i.ibb.co/6mSS6KJ/Software-Process-Management-Gantt.png)
 
@@ -402,7 +429,6 @@ Duration: 08/26/2021 - 09/09/2021
 
 #### Sprint Retrospective:
 
-_(Introduction to Sprint Retrospective:
 
 
 Sprint 0 was a really great experience for all of us. It not only introduced to Agile Development and how to plan/develop a sophisticated project, but it showed us how to be professionally organized and work as a group. We were very efficient in planning, but we fell through when it came to maintaining that energy towards progressivley putting out plan into action (except the presentation).
@@ -441,7 +467,6 @@ Duration: 09/09/2021 - 10-05-2021
 
 #### Sprint Retrospective:
 
-_(Introduction to Sprint Retrospective:
 
 Sprint 1 became a greater time crunch due to the increased workload from sprint 0 as well as busier schedules and time mismanagement. Fortunately, even through all of that adversity, our team was able to come together and dedicate important time to completing sprint 1. 
 Everyone worked together to fulfill their roles and the project progressed smoothly. We learned how through small feature additions, many unintentional bugs can be producted which is frustrating. 
@@ -452,29 +477,44 @@ Everyone worked together to fulfill their roles and the project progressed smoot
 
 
 -----------------------------------------------------------------------------
-### Sprint 2 - IN PROGRESS
+### Sprint 2 - COMPLETE
 
 Duration: 10/05/2021-10/26/2021
 
 #### Completed Tasks: 
 
 Functional
+
 1. Users need to login with username/password. Invalid username/password cannot be logged in
+
 2. Anyone can register for a new account to log in.
+
 3. Only logged-in users can send/receive messages (any)
+
 4. Logged-in users can logout
+
 5. Logged-in users can create a group chat (more than 2 members)
+
 6. Logged-in users in a group chat can send/receive messages from the group
+
 7. Seperated chat window for group chat
+
 8. Two use cases of your team choice
+
 	(a) Use case:  show password feature on login page
+
 	(b) Use case: user can switch between dark mode and light mode
+
+
 Non-functional requirements
+
 1. All data must be validated in all layers before sending/checking/forwarding
+
 2. All data must be sanitized in client-side before displaying
+
 3. Enter in an input to send data, clear data after sending
 
-Lates Commit Link: https://bitbucket.org/cps490f21-team3/cps490-project-team3/commits/ac6f6e33c9e5c8d59e335585cdc83d1d1c55eb3f
+Latest Commit Link: https://bitbucket.org/cps490f21-team3/cps490-project-team3/commits/ac6f6e33c9e5c8d59e335585cdc83d1d1c55eb3f
 
 #### Contributions: 
 
@@ -485,7 +525,6 @@ Lates Commit Link: https://bitbucket.org/cps490f21-team3/cps490-project-team3/co
 
 #### Sprint Retrospective:
 
-_(Introduction to Sprint Retrospective:
 
 Sprint 2 went a lot smoother in most aspects compared to previous sprints, but with midterms and busy schedules it was still hard to get to meet as often. We encountered multiple issues with the CSS; this included getting the external CSS to function properly and also our use case of darkmode/lightmode took a bit of debugging to get to work.
 However, regardless of the bugs and issues we were very successful in working productively and as a team to complete our tasks. Collaboration was important especially when we had to put our minds together to solve the functionality of adding a "group chat".
@@ -497,38 +536,53 @@ However, regardless of the bugs and issues we were very successful in working pr
 
 
 -----------------------------------------------------------------------------
-### Sprint x - START TO FILL OUT ONCE SPRINT 1 IS COMPLETE
+### Sprint 3 - Completed
 
-Duration: dd/mm/yyyy-dd/mm/yyyy
+Duration: 10/29/2021-12/02/2021
 
 #### Completed Tasks: 
 
-1. Task 1
-2. Task 2
-3. ...
+Functional
+1. All messages, including public, private, group chats, will be stored in the dat
+2. Logged-in users can view chat history from public, private, group chats after l
+3. Logged-in users can edit their account with additional information such as Full
+4. Users can create and keep connections with other users, e.g., friendships
+5. Two addition requirements from your team
+	(a) Use case: "Boop Buddy" Feature - users get assigned another random user to chat with for the day
+	(b) Use case: ???????????
+Non-functional requirements
+1. The system must be secure and defend against simple web attacks
+ - All data must be validated in all layers before sending/checking/forwarding
+ - All data must be sanitized in client-side before displaying
+2. Passwords must be hashed in the database
+3. Deployment with DevOps CI/CD
+ - Dockerfile for the application
+ - Setup a pipeline for continuous deployment
+
+Latest Commit Link: https://bitbucket.org/cps490f21-team3/cps490-project-team3/commits/25d6d7bd4e00a9aa9819044fd39daaa29e7c21ad
 
 #### Contributions: 
-
-1.  Member 1, x hours, contributed in xxx
-2.  Member 2, x hours, contributed in xxx
-3.  Member 3, x hours, contributed in xxx
-4.  Member 4, x hours, contributed in xxx
+                               (NEED TO UPDATE ALL CONTRIBUTIONS)
+1.  Jon Moran, 8-10 hours, Product Owner, contributed in planning, documentation, use cases(logout functionality), the slides/presentation
+2.  John Conroy, 9-14 hours, Developer, contributed in planning, meeting scheduling, use cases(group chat functionality, DB login/authentication), the slides/presentation
+3.  James Oei, 9-14 hours, Developer, contributed in planning, system design, features, use cases(group chat functionality), the slides/presentation
+4.  Will Manzella, 9-14 hours, Scrum Master, contributed in planning, organization, CSS and UI, use cases(show password, darkmode/lightmode), the slides/presentation
 
 #### Sprint Retrospective:
 
-_(Introduction to Sprint Retrospective:
 
-_Working through the sprints is a continuous improvement process. Discussing the sprint has just completed can improve the next sprints walk through a much efficient one. Sprint retrospection is done once a sprint is finished and the team is ready to start another sprint planning meeting. This discussion can take up to 1 hour depending on the ideal team size of 6 members. 
-Discussing good things happened during the sprint can improve the team's morale, good team-collaboration, appreciating someone who did a fantastic job to solve a blocker issue, work well-organized, helping someone in need. This is to improve the team's confidence and keep them motivated.
-As a team, we can discuss what has gone wrong during the sprint and come-up with improvement points for the next sprints. Few points can be like, need to manage time well, need to prioritize the tasks properly and finish a task in time, incorrect design lead to multiple reviews and that wasted time during the sprint, team meetings were too long which consumed most of the effective work hours. We can mention every problem is in the sprint which is hindering the progress.
-Finally, this meeting should improve your next sprint drastically and understand the team dynamics well. Mention the bullet points and discuss how to solve it.)_
+Sprint 3 was a bit rushed. Many of us were dealing with illnesses throughout the Sprint which affected our productivity. As fas as the actual development process went this was by far the best we have worked together as a team. We knew what each of our strengths were and delegated work to the right individuals. We worked very well as a team which is a good sign for future projects that may come around.
 
-| Good     |   Could have been better    |  How to improve?  |
-|----------|:---------------------------:|------------------:|
-|          |                             |                   |
+|          Good           |              Could have been better                |        How to improve?        |
+|-------------------------|:--------------------------------------------------:|------------------------------:|
+| Teamwork, Communication |  				Time Management					   |  Meeting daily to talk		   |
 
+
+
+-----------------------------------------------------------------------------
 
 
 # User guide/Demo
 
-Write as a demo with screenshots and as a guide for users to use for system.
+Write as a demo with screenshots and as a guide for users to use your system.
+
